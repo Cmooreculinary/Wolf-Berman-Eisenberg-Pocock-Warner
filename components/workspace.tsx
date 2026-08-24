@@ -6,6 +6,7 @@ import {
   Bot,
   Command,
   FileDown,
+  GitBranch,
   LayoutDashboard,
   Library,
   Moon,
@@ -20,9 +21,10 @@ import { InventoryView } from "@/components/views/inventory"
 import { ToolboxView } from "@/components/views/toolbox"
 import { VaultView } from "@/components/views/vault"
 import { DeckView } from "@/components/views/deck"
+import { ReposView } from "@/components/views/repos"
 import { cn } from "@/lib/utils"
 
-type ViewId = "convergence" | "blueprint" | "inventory" | "toolbox" | "vault" | "deck"
+type ViewId = "convergence" | "blueprint" | "inventory" | "repos" | "toolbox" | "vault" | "deck"
 
 const NAV: {
   group: string
@@ -39,6 +41,7 @@ const NAV: {
     group: "Core",
     items: [
       { id: "inventory", label: "Inventory", icon: Bot, caption: "Agents, methods, protocols" },
+      { id: "repos", label: "Repos reviewed", icon: GitBranch, caption: "Last 30 days, deduped" },
       { id: "toolbox", label: "Toolbox", icon: Wrench, caption: "Founder instruments" },
       { id: "vault", label: "Vault", icon: Library, caption: "Audio & documents" },
     ],
@@ -53,6 +56,7 @@ const TITLES: Record<ViewId, string> = {
   convergence: "Convergence",
   blueprint: "2026 Blueprint",
   inventory: "Technical Core",
+  repos: "Repos Reviewed",
   toolbox: "Founder Toolbox",
   vault: "Masterclass Vault",
   deck: "Slide Deck",
@@ -262,6 +266,7 @@ export function Workspace() {
               {view === "convergence" && <ConvergenceView />}
               {view === "blueprint" && <BlueprintView />}
               {view === "inventory" && <InventoryView />}
+              {view === "repos" && <ReposView />}
               {view === "toolbox" && <ToolboxView />}
               {view === "vault" && <VaultView />}
               {view === "deck" && <DeckView />}
