@@ -79,7 +79,7 @@ export function DeckView() {
               </ul>
             ) : null}
             <div className="mt-auto flex items-end justify-between pt-4 font-mono text-[10px] text-muted-foreground">
-              <span>Builders Sentinel · Eisenberg, Peacock &amp; Warner</span>
+              <span className="uppercase tracking-[0.14em]">Blue Collar Appz Co. · bcappz.com</span>
               <span>
                 {slide.n} / {SLIDES.length}
               </span>
@@ -120,7 +120,7 @@ export function DeckView() {
       </div>
 
       <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground">
-        Use ← / → to navigate. Export writes the full deck in the Slate &amp; Amber palette.
+        Use ← / → to navigate. Export writes the full deck in the Blue Collar Appz palette.
       </p>
     </div>
   )

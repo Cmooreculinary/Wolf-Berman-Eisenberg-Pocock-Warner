@@ -1,9 +1,11 @@
 import { SLIDES } from "./data"
 
-const SLATE = "1E2430"
-const SLATE_SOFT = "5B6472"
-const AMBER = "C8871F"
-const PAPER = "F6F5F2"
+/* Blue Collar Appz Co. palette — sampled from bcappz.com */
+const SHOP_FLOOR = "141414"
+const HAZARD = "EE6620"
+const CHALK = "F8F8F8"
+const CHALK_SOFT = "A5A29F"
+const FACE = "DM Sans"
 
 export async function exportDeck() {
   const mod = await import("pptxgenjs")
@@ -11,16 +13,25 @@ export async function exportDeck() {
   const pptx = new PptxGenJS()
 
   pptx.layout = "LAYOUT_16x9"
-  pptx.author = "Builders Sentinel"
-  pptx.company = "Eisenberg, Peacock & Warner"
+  pptx.author = "Blue Collar Appz Co."
+  pptx.company = "Blue Collar Appz Co. — bcappz.com"
   pptx.title = "Builders Sentinel — 2026 AI Venture Blueprint"
 
   for (const s of SLIDES) {
     const slide = pptx.addSlide()
-    slide.background = { color: PAPER }
+    slide.background = { color: SHOP_FLOOR }
 
-    // amber rule
-    slide.addShape("rect", { x: 0.6, y: 0.6, w: 0.9, h: 0.045, fill: { color: AMBER } })
+    // the four slanted bars of the BCA wordmark
+    for (let i = 0; i < 4; i++) {
+      slide.addShape("rect", {
+        x: 0.6 + i * 0.13,
+        y: 0.52,
+        w: 0.055,
+        h: 0.2,
+        fill: { color: HAZARD },
+        rotate: 15,
+      })
+    }
 
     slide.addText(s.kicker.toUpperCase(), {
       x: 0.6,
@@ -30,8 +41,8 @@ export async function exportDeck() {
       fontSize: 11,
       bold: true,
       charSpacing: 2,
-      color: SLATE_SOFT,
-      fontFace: "Helvetica",
+      color: CHALK_SOFT,
+      fontFace: FACE,
     })
 
     slide.addText(s.title, {
@@ -41,8 +52,8 @@ export async function exportDeck() {
       h: 1.1,
       fontSize: 34,
       bold: true,
-      color: SLATE,
-      fontFace: "Helvetica",
+      color: CHALK,
+      fontFace: FACE,
     })
 
     slide.addText(s.body, {
@@ -51,9 +62,9 @@ export async function exportDeck() {
       w: 8.4,
       h: 0.9,
       fontSize: 15,
-      color: SLATE_SOFT,
+      color: CHALK_SOFT,
       lineSpacingMultiple: 1.3,
-      fontFace: "Helvetica",
+      fontFace: FACE,
     })
 
     if (s.bullets.length) {
@@ -65,9 +76,9 @@ export async function exportDeck() {
           w: 8.2,
           h: 1.7,
           fontSize: 14,
-          color: SLATE,
+          color: CHALK,
           lineSpacingMultiple: 1.45,
-          fontFace: "Helvetica",
+          fontFace: FACE,
         },
       )
     }
@@ -79,18 +90,18 @@ export async function exportDeck() {
       h: 0.3,
       fontSize: 10,
       align: "right",
-      color: SLATE_SOFT,
-      fontFace: "Helvetica",
+      color: CHALK_SOFT,
+      fontFace: FACE,
     })
 
-    slide.addText("Builders Sentinel · Eisenberg, Peacock & Warner", {
+    slide.addText("Blue Collar Appz Co. · bcappz.com · Eisenberg, Peacock & Warner", {
       x: 0.6,
       y: 4.95,
       w: 5,
       h: 0.3,
       fontSize: 10,
-      color: SLATE_SOFT,
-      fontFace: "Helvetica",
+      color: CHALK_SOFT,
+      fontFace: FACE,
     })
   }
 

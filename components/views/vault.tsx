@@ -144,7 +144,7 @@ export function VaultView() {
           <PanelHeader title="Document vault" hint="Executive summaries and briefings, copy-ready." />
           <ul className="mt-4 space-y-3">
             {DOCS.map((d) => (
-              <li key={d.id} className="rounded-xl border border-border bg-secondary/40 p-4">
+              <li key={d.id} className="rounded-lg border border-border bg-secondary/40 p-4">
                 <div className="flex items-start gap-2.5">
                   <FileText className="mt-0.5 size-4 shrink-0 text-accent" />
                   <div className="min-w-0">

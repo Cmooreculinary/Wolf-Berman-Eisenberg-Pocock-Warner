@@ -50,7 +50,7 @@ function ValueProp() {
         <TextField label="New duration" value={fast} onChange={setFast} placeholder="10 minutes" />
         <TextField label="Old duration" value={slow} onChange={setSlow} placeholder="10 hours" />
       </div>
-      <blockquote className="mt-5 rounded-xl border-l-2 border-accent bg-secondary/50 px-4 py-3.5">
+      <blockquote className="mt-5 rounded-lg border-l-2 border-accent bg-secondary/50 px-4 py-3.5">
         <p className="text-[15px] font-medium leading-relaxed text-pretty">{sentence}</p>
       </blockquote>
       <p className="mt-2 font-mono text-[11px] text-muted-foreground">
@@ -94,7 +94,7 @@ function Unbundle() {
               <div className="mt-0.5 text-[11px] text-muted-foreground text-pretty">Pain: {n.pain}</div>
             </div>
             <div className="ml-auto text-right">
-              <div className="font-mono text-[14px] font-semibold tabular-nums text-accent-foreground dark:text-accent">
+              <div className="font-mono text-[14px] font-semibold tabular-nums text-accent">
                 {currency(n.mrr)}
               </div>
               <div className="text-[11px] text-muted-foreground">ceiling / mo</div>
@@ -202,7 +202,7 @@ If the objective is underspecified, return the single question that unblocks it 
       <div className="mt-5">
         <Slider label="Consensus quorum" value={models} min={2} max={5} onChange={setModels} format={(v) => `${v} models`} />
       </div>
-      <pre className="scroll-slim mt-5 max-h-80 overflow-auto rounded-xl border border-border bg-secondary/50 p-4 font-mono text-[12px] leading-relaxed">
+      <pre className="scroll-slim mt-5 max-h-80 overflow-auto rounded-lg border border-border bg-secondary/50 p-4 font-mono text-[12px] leading-relaxed">
         {prompt}
       </pre>
     </Panel>

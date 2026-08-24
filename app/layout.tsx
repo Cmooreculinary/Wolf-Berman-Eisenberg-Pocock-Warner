@@ -1,15 +1,22 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { DM_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 
-const _geistSans = Geist({ subsets: ['latin'] })
-const _geistMono = Geist_Mono({ subsets: ['latin'] })
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+})
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
+})
 
 export const metadata: Metadata = {
-  title: 'Builders Sentinel — Eisenberg, Peacock & Warner',
+  title: 'Builders Sentinel — Blue Collar Appz Co.',
   description:
-    'A 2026 operating system for autonomous agent swarms, zero-trust governance, and owned media distribution. Includes the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck.',
+    'A rolling four-week intelligence window on Eisenberg, Peacock and Warner: repos reviewed with crossovers cut, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built from the work by Blue Collar Appz Co.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -31,8 +38,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
-  themeColor: '#f2f2f4',
+  colorScheme: 'dark',
+  themeColor: '#141414',
 }
 
 export default function RootLayout({
@@ -41,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className={`${dmSans.variable} ${plexMono.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

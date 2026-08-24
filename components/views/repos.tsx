@@ -50,7 +50,7 @@ function LinkPill({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-[11px] font-medium transition-colors",
         tone === "accent"
-          ? "border-accent/40 bg-accent/12 text-accent-foreground hover:bg-accent/20 dark:text-accent"
+          ? "border-accent/40 bg-accent/12 text-accent hover:bg-accent/20"
           : "border-border bg-card text-muted-foreground hover:text-foreground",
       )}
     >
@@ -99,11 +99,11 @@ function RollRail({
 }) {
   return (
     <div className="flex flex-col gap-2.5 lg:flex-row lg:items-stretch">
-      <div className="flex shrink-0 flex-col justify-between rounded-xl border border-dashed border-accent/50 bg-accent/8 p-3 lg:w-[132px]">
+      <div className="flex shrink-0 flex-col justify-between rounded-lg border border-dashed border-accent/50 bg-accent/8 p-3 lg:w-[132px]">
         <div>
           <div className="flex items-center gap-1.5">
-            <Inbox className="size-3.5 text-accent-foreground dark:text-accent" aria-hidden />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-accent-foreground dark:text-accent">
+            <Inbox className="size-3.5 text-accent" aria-hidden />
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
               Incoming
             </span>
           </div>
@@ -124,7 +124,7 @@ function RollRail({
               onClick={() => onPick(selected ? "all" : id)}
               aria-pressed={selected}
               className={cn(
-                "flex flex-col rounded-xl border p-3 text-left transition-colors",
+                "flex flex-col rounded-lg border p-3 text-left transition-colors",
                 selected
                   ? "border-accent bg-accent/12"
                   : w.slot === 1
@@ -154,7 +154,7 @@ function RollRail({
         })}
       </div>
 
-      <div className="flex shrink-0 flex-col justify-between rounded-xl border border-border bg-secondary/50 p-3 lg:w-[132px]">
+      <div className="flex shrink-0 flex-col justify-between rounded-lg border border-border bg-secondary/50 p-3 lg:w-[132px]">
         <div>
           <div className="flex items-center gap-1.5">
             <Archive className="size-3.5 text-muted-foreground" aria-hidden />
@@ -173,7 +173,7 @@ function RollRail({
 function Row({ r, slot }: { r: DedupedRepo; slot: number }) {
   const [open, setOpen] = useState(false)
   return (
-    <li className="rounded-xl border border-border bg-card/60 p-4">
+    <li className="rounded-lg border border-border bg-card/60 p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -228,7 +228,7 @@ function Row({ r, slot }: { r: DedupedRepo; slot: number }) {
                     href={episodeUrl(d)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent-foreground underline underline-offset-2 dark:text-accent"
+                    className="text-accent underline underline-offset-2"
                   >
                     listen
                   </a>
@@ -245,7 +245,7 @@ function Row({ r, slot }: { r: DedupedRepo; slot: number }) {
 function VaultBlock({ w }: { w: VaultWeek }) {
   const [open, setOpen] = useState(false)
   return (
-    <li className="rounded-xl border border-border bg-card/40 p-3.5">
+    <li className="rounded-lg border border-border bg-card/40 p-3.5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[13px] font-semibold tracking-tight">{weekRangeLabel(w)}</span>
@@ -273,7 +273,7 @@ function VaultBlock({ w }: { w: VaultWeek }) {
                 href={episodeUrl(r)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent-foreground underline underline-offset-2 dark:text-accent"
+                className="text-accent underline underline-offset-2"
               >
                 Ep {r.ep}
               </a>
@@ -484,7 +484,7 @@ export function ReposView() {
         </p>
 
         {rows.length === 0 ? (
-          <p className="mt-4 rounded-xl border border-dashed border-border px-4 py-8 text-center text-[13px] text-muted-foreground">
+          <p className="mt-4 rounded-lg border border-dashed border-border px-4 py-8 text-center text-[13px] text-muted-foreground">
             No repo in the live window matches that filter.
           </p>
         ) : (
@@ -513,7 +513,7 @@ export function ReposView() {
                   href={episodeUrl(r)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent-foreground underline underline-offset-2 dark:text-accent"
+                  className="text-accent underline underline-offset-2"
                 >
                   Ep {r.ep}
                 </a>

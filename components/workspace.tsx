@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import {
   Aperture,
   Bot,
-  Command,
   FileDown,
   GitBranch,
   LayoutDashboard,
@@ -133,27 +132,35 @@ function FoundersNote({ onClose }: { onClose: () => void }) {
 
 export function Workspace() {
   const [view, setView] = useState<ViewId>("convergence")
-  const [dark, setDark] = useState(false)
+  // BCA ships dark by default; `light` is the opt-in counterpart.
+  const [light, setLight] = useState(false)
   const [note, setNote] = useState(false)
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark)
-  }, [dark])
+    document.documentElement.classList.toggle("light", light)
+  }, [light])
 
   return (
     <div className="min-h-dvh bg-background">
       {/* menu bar */}
       <div className="sticky top-0 z-30 flex h-7 items-center gap-4 border-b border-border/70 mac-glass px-4 text-[12px] text-muted-foreground">
-        <Command className="size-3.5 text-foreground" />
-        <span className="font-semibold text-foreground">Builders Sentinel</span>
-        <span className="hidden sm:inline">File</span>
-        <span className="hidden sm:inline">View</span>
+        <span aria-hidden className="h-3 w-4 shrink-0 bca-hatch" />
+        <a
+          href="https://bcappz.com"
+          target="_blank"
+          rel="noreferrer"
+          className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-foreground hover:text-accent"
+        >
+          Blue Collar Appz
+        </a>
+        <span className="hidden text-border-strong sm:inline">/</span>
+        <span className="hidden sm:inline">Builders Sentinel</span>
         <button className="hidden hover:text-foreground sm:inline" onClick={() => setNote(true)}>
           Note
         </button>
         <div className="ml-auto flex items-center gap-3">
-          <button onClick={() => setDark((d) => !d)} aria-label="Toggle appearance" className="hover:text-foreground">
-            {dark ? <Sun className="size-3.5" /> : <Moon className="size-3.5" />}
+          <button onClick={() => setLight((l) => !l)} aria-label="Toggle appearance" className="hover:text-foreground">
+            {light ? <Moon className="size-3.5" /> : <Sun className="size-3.5" />}
           </button>
           <Clock />
         </div>
@@ -161,7 +168,7 @@ export function Workspace() {
 
       <div className="p-3 sm:p-6">
         {/* window */}
-        <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-[1400px] overflow-hidden rounded-2xl border border-border bg-card shadow-[0_30px_80px_-40px_oklch(0_0_0/0.45)]">
+        <div className="mx-auto flex min-h-[calc(100dvh-4.5rem)] max-w-[1400px] overflow-hidden rounded-lg border border-border bg-card shadow-[0_30px_80px_-40px_oklch(0_0_0/0.45)]">
           {/* sidebar */}
           <aside className="hidden w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
             <div className="flex items-center gap-2 px-4 py-3.5">
@@ -185,10 +192,10 @@ export function Workspace() {
                             onClick={() => setView(it.id)}
                             aria-current={on}
                             className={cn(
-                              "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors",
+                              "flex w-full items-center gap-2.5 border-l-2 px-2.5 py-2 text-left transition-colors",
                               on
-                                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                                : "text-sidebar-foreground hover:bg-sidebar-accent/60",
+                                ? "border-accent bg-sidebar-accent text-sidebar-accent-foreground"
+                                : "border-transparent text-sidebar-foreground hover:bg-sidebar-accent/60",
                             )}
                           >
                             <Icon className={cn("size-4 shrink-0", on ? "text-accent" : "text-muted-foreground")} />

@@ -131,7 +131,7 @@ export function BlueprintView() {
           <h3 className="text-[15px] font-semibold tracking-tight">2015 VC treadmill vs 2026 multipreneur matrix</h3>
         </div>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
-          <div className="rounded-xl border border-border bg-secondary/40 p-5">
+          <div className="rounded-lg border border-border bg-secondary/40 p-5">
             <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">2015 — Treadmill</div>
             <ul className="mt-3 space-y-2.5 text-[13px] leading-relaxed">
               {[
@@ -147,8 +147,8 @@ export function BlueprintView() {
               ))}
             </ul>
           </div>
-          <div className="rounded-xl border border-accent/40 bg-accent/8 p-5">
-            <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-foreground dark:text-accent">
+          <div className="rounded-lg border border-accent/40 bg-accent/8 p-5">
+            <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
               2026 — Multipreneur
             </div>
             <ul className="mt-3 space-y-2.5 text-[13px] leading-relaxed">

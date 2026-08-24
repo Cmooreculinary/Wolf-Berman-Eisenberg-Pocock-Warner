@@ -51,10 +51,10 @@ export function Chip({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium tracking-tight",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.12em]",
         tone === "neutral" && "bg-secondary text-secondary-foreground",
-        tone === "accent" && "bg-accent/18 text-accent-foreground dark:text-accent",
-        tone === "outline" && "border border-border text-muted-foreground",
+        tone === "accent" && "border border-accent/45 bg-accent/12 text-accent",
+        tone === "outline" && "border border-border-strong text-muted-foreground",
         className,
       )}
     >
@@ -75,12 +75,12 @@ export function Stat({
   emphasis?: boolean
 }) {
   return (
-    <div className="rounded-xl border border-border bg-secondary/50 px-4 py-3">
+    <div className="rounded-lg border border-border bg-secondary/50 px-4 py-3">
       <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</div>
       <div
         className={cn(
           "mt-1 font-mono text-[19px] font-semibold tabular-nums tracking-tight",
-          emphasis && "text-accent-foreground dark:text-accent",
+          emphasis && "text-accent",
         )}
       >
         {value}

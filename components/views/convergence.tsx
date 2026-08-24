@@ -67,7 +67,7 @@ export function ConvergenceView() {
                 aria-pressed={on}
                 style={{ top: POSITIONS[i].top, left: POSITIONS[i].left }}
                 className={cn(
-                  "absolute -translate-x-1/2 -translate-y-1/2 rounded-2xl border px-3.5 py-3 text-left transition-all duration-200",
+                  "absolute -translate-x-1/2 -translate-y-1/2 rounded-lg border px-3.5 py-3 text-left transition-all duration-200",
                   on
                     ? "border-accent/60 bg-card shadow-[0_10px_30px_-14px_oklch(0_0_0/0.3)] scale-[1.03]"
                     : "border-border bg-card/70 hover:bg-card",
@@ -86,8 +86,8 @@ export function ConvergenceView() {
         {/* detail */}
         <Panel className="p-6">
           <div className="flex items-center gap-2.5">
-            <span className="grid size-9 place-items-center rounded-xl bg-accent/18">
-              <Icon className="size-4.5 text-accent-foreground dark:text-accent" />
+            <span className="grid size-9 place-items-center rounded-lg bg-accent/18">
+              <Icon className="size-4.5 text-accent" />
             </span>
             <Chip tone="outline">Pillar {String(PILLARS.findIndex((p) => p.id === active) + 1).padStart(2, "0")}</Chip>
           </div>
