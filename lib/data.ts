@@ -47,8 +47,8 @@ export const PILLARS = [
   },
 ]
 
-export const TASTING_PLATE =
-  "We parse the complex, noisy space of AI agents, legal compliance, and media distribution into a tight, vibrant plate of tasty tidbits. No fluff, no filler—just pure technical meat on the bone."
+export const SOURCE_NOTE =
+  "Eisenberg, Peacock and Warner are the three best rooms I have found for a founder who is new to this game. Most outlets serve a leisurely meal — forty minutes of preamble wrapped around one usable idea. These three go straight at the work: agents, compliance, distribution. Down and dirty, pure information. This agent holds the same standard, which is why nothing here is padded."
 
 export const INVENTORY: InventoryItem[] = [
   {
@@ -511,9 +511,9 @@ export const SLIDES = [
   },
   {
     n: 2,
-    kicker: "The Plate",
-    title: "No fluff, no filler",
-    body: TASTING_PLATE,
+    kicker: "The Sources",
+    title: "Three feeds worth the whole week",
+    body: SOURCE_NOTE,
     bullets: [],
   },
   {
@@ -617,7 +617,7 @@ export const SLIDES = [
   {
     n: 13,
     kicker: "Close",
-    title: "Technical meat on the bone",
+    title: "No padding, no preamble",
     body: "Build the agents. Gate the output. Own the channel. Keep the equity.",
     bullets: [],
   },

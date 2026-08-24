@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Bot, ShieldCheck, Radio, ArrowRight } from "lucide-react"
-import { PILLARS, TASTING_PLATE, INVENTORY } from "@/lib/data"
+import { PILLARS, SOURCE_NOTE, INVENTORY } from "@/lib/data"
 import { Panel, Chip, Stat } from "@/components/kit"
 import { cn } from "@/lib/utils"
 
@@ -34,9 +34,24 @@ export function ConvergenceView() {
       <header className="max-w-2xl">
         <Chip tone="accent">Convergence Focal Engine</Chip>
         <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">
-          Three noisy disciplines, one tight plate.
+          Three sources worth a founder&apos;s whole week.
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">{TASTING_PLATE}</p>
+        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
+        <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="text-accent">Commended</span>
+          <span aria-hidden className="text-border-strong">
+            /
+          </span>
+          <span>Eisenberg</span>
+          <span aria-hidden className="text-border-strong">
+            /
+          </span>
+          <span>Peacock</span>
+          <span aria-hidden className="text-border-strong">
+            /
+          </span>
+          <span>Warner</span>
+        </div>
       </header>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">

@@ -40,7 +40,7 @@ const NAV: {
   {
     group: "Thesis",
     items: [
-      { id: "convergence", label: "Convergence", icon: Aperture, caption: "Three pillars, one plate" },
+      { id: "convergence", label: "Convergence", icon: Aperture, caption: "Three sources, three pillars" },
       { id: "blueprint", label: "Blueprint", icon: LayoutDashboard, caption: "ACP engine & risk model" },
     ],
   },
