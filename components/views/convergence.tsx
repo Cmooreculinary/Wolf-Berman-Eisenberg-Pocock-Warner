@@ -31,26 +31,32 @@ export function ConvergenceView() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
-      <header className="max-w-2xl">
-        <Chip tone="accent">Convergence Focal Engine</Chip>
-        <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">
-          Three sources worth a founder&apos;s whole week.
+      <header className="max-w-3xl">
+        <Chip tone="accent">Rolling 4-Week Intelligence</Chip>
+
+        {/* the name is the hook — it carries the page */}
+        <h1 className="mt-4 text-[40px] font-semibold leading-[1.02] tracking-[-0.045em] text-balance sm:text-[56px]">
+          Eisenberg,
+          <br />
+          Peacock <span className="text-accent">&amp;</span> Warner
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+
+        <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
           <span className="text-accent">Commended</span>
           <span aria-hidden className="text-border-strong">
             /
           </span>
-          <span>Eisenberg</span>
+          <span>Agents</span>
           <span aria-hidden className="text-border-strong">
             /
           </span>
-          <span>Peacock</span>
+          <span>Governance</span>
           <span aria-hidden className="text-border-strong">
             /
           </span>
-          <span>Warner</span>
+          <span>Distribution</span>
         </div>
       </header>
 

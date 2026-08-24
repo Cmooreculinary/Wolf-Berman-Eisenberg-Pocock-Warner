@@ -468,6 +468,6 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
 }
 
 export function lessonUrl(name: string, l: SkillLesson) {
-  const q = `Builders Sentinel ${l.host} episode ${l.ep} ${name}`
+  const q = `Eisenberg Peacock Warner ${l.host} episode ${l.ep} ${name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }

@@ -478,7 +478,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d4",
     title: "ACP Funnel Operating Manual",
-    source: "Builders Sentinel",
+    source: "Eisenberg, Peacock & Warner",
     pages: 26,
     summary:
       "Audience, Community, Product with owned-channel math, 40–50% affiliate rev-share mechanics, and a 5x ARR exit model.",
@@ -486,7 +486,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d5",
     title: "Agent Swarm Reference Architecture",
-    source: "Builders Sentinel",
+    source: "Eisenberg, Peacock & Warner",
     pages: 31,
     summary:
       "Role definitions for all 14 agents, circuit-breaker thresholds, deterministic loop hashing, and the egress gate contract.",
@@ -494,7 +494,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d6",
     title: "Work-Product Privilege in Agent Pipelines",
-    source: "Builders Sentinel",
+    source: "Eisenberg, Peacock & Warner",
     pages: 15,
     summary:
       "How to tag privileged material at ingestion so autonomous agents cannot waive protection by publishing derived output.",
@@ -504,7 +504,7 @@ export const DOCS: DocItem[] = [
 export const SLIDES = [
   {
     n: 1,
-    kicker: "Builders Sentinel",
+    kicker: "Rolling 4-Week Intelligence",
     title: "Eisenberg, Peacock & Warner",
     body: "A 2026 operating system for autonomous agents, zero-trust governance, and owned distribution.",
     bullets: [],

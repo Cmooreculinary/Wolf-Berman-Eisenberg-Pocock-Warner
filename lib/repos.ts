@@ -35,7 +35,7 @@ export const PILLAR_SHORT: Record<RepoPillar, string> = {
  * `episodeUrl` for canonical permalinks once the show's episode index is wired in.
  */
 export function episodeUrl(r: RepoReview) {
-  const q = `Builders Sentinel ${r.host} episode ${r.ep} ${r.name}`
+  const q = `Eisenberg Peacock Warner ${r.host} episode ${r.ep} ${r.name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }
 
