@@ -1,0 +1,115 @@
+"use client"
+
+import { useState } from "react"
+import { Bot, ShieldCheck, Radio, ArrowRight } from "lucide-react"
+import { PILLARS, TASTING_PLATE, INVENTORY } from "@/lib/data"
+import { Panel, Chip, Stat } from "@/components/kit"
+import { cn } from "@/lib/utils"
+
+const ICONS = {
+  autonomy: Bot,
+  governance: ShieldCheck,
+  distribution: Radio,
+}
+
+// three nodes on a circle: top, bottom-right, bottom-left
+const POSITIONS = [
+  { top: "2%", left: "50%" },
+  { top: "72%", left: "92%" },
+  { top: "72%", left: "8%" },
+]
+
+export function ConvergenceView() {
+  const [active, setActive] = useState<(typeof PILLARS)[number]["id"]>("autonomy")
+  const pillar = PILLARS.find((p) => p.id === active)!
+  const Icon = ICONS[active]
+
+  const counts = PILLARS.map((p) => ({
+    id: p.id,
+    n: INVENTORY.filter((i) => i.pillar === p.id).length,
+  }))
+
+  return (
+    <div className="mx-auto max-w-6xl px-6 py-8">
+      <header className="max-w-2xl">
+        <Chip tone="accent">Convergence Focal Engine</Chip>
+        <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">
+          Three noisy disciplines, one tight plate.
+        </h1>
+        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground text-pretty">{TASTING_PLATE}</p>
+      </header>
+
+      <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">
+        {/* focal circle */}
+        <div className="relative mx-auto aspect-square w-full max-w-[440px]">
+          <div className="absolute inset-[9%] rounded-full border border-border" />
+          <div className="absolute inset-[22%] rounded-full border border-dashed border-border" />
+
+          <div className="absolute inset-[30%] flex flex-col items-center justify-center rounded-full bg-card shadow-[0_18px_50px_-24px_oklch(0_0_0/0.35)]">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              Convergence
+            </span>
+            <span className="mt-1 text-center text-[15px] font-semibold leading-tight tracking-tight">
+              Builders
+              <br />
+              Sentinel
+            </span>
+            <span className="mt-2 h-px w-8 bg-accent" />
+          </div>
+
+          {PILLARS.map((p, i) => {
+            const NodeIcon = ICONS[p.id]
+            const on = p.id === active
+            return (
+              <button
+                key={p.id}
+                onClick={() => setActive(p.id)}
+                aria-pressed={on}
+                style={{ top: POSITIONS[i].top, left: POSITIONS[i].left }}
+                className={cn(
+                  "absolute -translate-x-1/2 -translate-y-1/2 rounded-2xl border px-3.5 py-3 text-left transition-all duration-200",
+                  on
+                    ? "border-accent/60 bg-card shadow-[0_10px_30px_-14px_oklch(0_0_0/0.3)] scale-[1.03]"
+                    : "border-border bg-card/70 hover:bg-card",
+                )}
+              >
+                <NodeIcon className={cn("size-4", on ? "text-accent" : "text-muted-foreground")} />
+                <div className="mt-1.5 text-[12px] font-semibold tracking-tight">{p.short}</div>
+                <div className="font-mono text-[10px] text-muted-foreground">
+                  {counts.find((c) => c.id === p.id)!.n} assets
+                </div>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* detail */}
+        <Panel className="p-6">
+          <div className="flex items-center gap-2.5">
+            <span className="grid size-9 place-items-center rounded-xl bg-accent/18">
+              <Icon className="size-4.5 text-accent-foreground dark:text-accent" />
+            </span>
+            <Chip tone="outline">Pillar {String(PILLARS.findIndex((p) => p.id === active) + 1).padStart(2, "0")}</Chip>
+          </div>
+          <h2 className="mt-4 text-[20px] font-semibold leading-snug tracking-tight text-balance">{pillar.title}</h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">{pillar.line}</p>
+          <ul className="mt-5 space-y-3">
+            {pillar.points.map((pt) => (
+              <li key={pt} className="flex gap-2.5 text-[13px] leading-relaxed">
+                <ArrowRight className="mt-1 size-3.5 shrink-0 text-accent" />
+                <span className="text-pretty">{pt}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+
+      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Stat label="Autonomous agents" value="14" sub="specialized machine roles" emphasis />
+        <Stat label="Core methods" value="10" sub="documented techniques" />
+        <Stat label="Protocol surfaces" value="4" sub="MCP, Datalog, SSE" />
+        <Stat label="Human FTEs" value="0" sub="verification is automated" />
+      </div>
+    </div>
+  )
+}
