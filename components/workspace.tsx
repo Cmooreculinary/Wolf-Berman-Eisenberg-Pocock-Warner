@@ -4,15 +4,14 @@ import { useEffect, useState } from "react"
 import {
   Aperture,
   Bot,
-  FileDown,
   GitBranch,
   LayoutDashboard,
   Library,
   Moon,
+  PenLine,
   Presentation,
   Sun,
   Wrench,
-  X,
 } from "lucide-react"
 import { ConvergenceView } from "@/components/views/convergence"
 import { BlueprintView } from "@/components/views/blueprint"
@@ -21,9 +20,18 @@ import { ToolboxView } from "@/components/views/toolbox"
 import { VaultView } from "@/components/views/vault"
 import { DeckView } from "@/components/views/deck"
 import { ReposView } from "@/components/views/repos"
+import { FoundersView } from "@/components/views/founders"
 import { cn } from "@/lib/utils"
 
-type ViewId = "convergence" | "blueprint" | "inventory" | "repos" | "toolbox" | "vault" | "deck"
+type ViewId =
+  | "convergence"
+  | "blueprint"
+  | "inventory"
+  | "repos"
+  | "toolbox"
+  | "vault"
+  | "deck"
+  | "founders"
 
 const NAV: {
   group: string
@@ -49,6 +57,12 @@ const NAV: {
     group: "Output",
     items: [{ id: "deck", label: "Slide deck", icon: Presentation, caption: "13 slides + .pptx" }],
   },
+  {
+    group: "Shop",
+    items: [
+      { id: "founders", label: "Founder's note", icon: PenLine, caption: "Trench philosophy" },
+    ],
+  },
 ]
 
 const TITLES: Record<ViewId, string> = {
@@ -59,6 +73,7 @@ const TITLES: Record<ViewId, string> = {
   toolbox: "Founder Toolbox",
   vault: "Masterclass Vault",
   deck: "Slide Deck",
+  founders: "Founder's Note",
 }
 
 function Clock() {
@@ -75,66 +90,10 @@ function Clock() {
   return <span className="font-mono tabular-nums">{now}</span>
 }
 
-function FoundersNote({ onClose }: { onClose: () => void }) {
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose()
-    }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [onClose])
-
-  return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-foreground/25 p-6 backdrop-blur-sm">
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Founder's note"
-        className="mac-card w-full max-w-lg p-0"
-      >
-        <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-          <button
-            onClick={onClose}
-            aria-label="Close"
-            className="grid size-3 place-items-center rounded-full bg-destructive/90 text-transparent hover:text-foreground/70"
-          >
-            <X className="size-2" />
-          </button>
-          <span className="mx-auto text-[12px] font-medium text-muted-foreground">Founder&apos;s Note</span>
-        </div>
-        <div className="p-6">
-          <h2 className="text-[20px] font-semibold leading-snug tracking-tight text-balance">
-            Verification is the product.
-          </h2>
-          <div className="mt-4 space-y-3 text-[13px] leading-relaxed text-muted-foreground">
-            <p className="text-pretty">
-              Anyone can point a model at a repository and watch the line count climb. The hard part in 2026 is proving
-              that what came out is correct, compliant, and shippable — at the same speed it was written.
-            </p>
-            <p className="text-pretty">
-              So the stack is deliberately boring where it matters: deny-by-default egress, identity for every machine
-              principal, declarative policy with a derivation for each denial, and a critic whose only job is to find the
-              defect the author missed.
-            </p>
-            <p className="text-pretty">
-              Distribution follows the same rule. Own the channel, pay the creators who actually sell, and ship a free
-              utility instead of buying attention that resets every month.
-            </p>
-          </div>
-          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-            Eisenberg, Peacock &amp; Warner
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export function Workspace() {
   const [view, setView] = useState<ViewId>("convergence")
   // BCA ships dark by default; `light` is the opt-in counterpart.
   const [light, setLight] = useState(false)
-  const [note, setNote] = useState(false)
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", light)
@@ -155,9 +114,6 @@ export function Workspace() {
         </a>
         <span className="hidden text-border-strong sm:inline">/</span>
         <span className="hidden sm:inline">Builders Sentinel</span>
-        <button className="hidden hover:text-foreground sm:inline" onClick={() => setNote(true)}>
-          Note
-        </button>
         <div className="ml-auto flex items-center gap-3">
           <button onClick={() => setLight((l) => !l)} aria-label="Toggle appearance" className="hover:text-foreground">
             {light ? <Moon className="size-3.5" /> : <Sun className="size-3.5" />}
@@ -212,13 +168,15 @@ export function Workspace() {
               ))}
             </nav>
             <div className="border-t border-sidebar-border p-3">
-              <button
-                onClick={() => setNote(true)}
+              <a
+                href="https://bcappz.com"
+                target="_blank"
+                rel="noreferrer"
                 className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-[12px] font-medium text-muted-foreground transition-colors hover:bg-sidebar-accent/60 hover:text-foreground"
               >
-                <FileDown className="size-3.5" />
-                Founder&apos;s note
-              </button>
+                <span aria-hidden className="h-3 w-4 shrink-0 bca-hatch" />
+                bcappz.com
+              </a>
             </div>
           </aside>
 
@@ -233,7 +191,7 @@ export function Workspace() {
               <div className="min-w-0">
                 <div className="truncate text-[13px] font-semibold tracking-tight">{TITLES[view]}</div>
                 <div className="truncate text-[11px] text-muted-foreground">
-                  Eisenberg, Peacock &amp; Warner — 2026
+                  Blue Collar Appz Co. — watching Eisenberg, Peacock &amp; Warner
                 </div>
               </div>
               <div className="ml-auto hidden items-center gap-1 md:flex">
@@ -277,12 +235,11 @@ export function Workspace() {
               {view === "toolbox" && <ToolboxView />}
               {view === "vault" && <VaultView />}
               {view === "deck" && <DeckView />}
+              {view === "founders" && <FoundersView />}
             </main>
           </div>
         </div>
       </div>
-
-      {note ? <FoundersNote onClose={() => setNote(false)} /> : null}
     </div>
   )
 }
