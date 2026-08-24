@@ -872,3 +872,156 @@ export function formatDate(iso: string) {
     timeZone: "UTC",
   })
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Rolling 4-week window
+
+   The Monday ingest: the agent grabs the week that just closed, files it as
+   Week 1, and every other week shifts down one slot. Whatever falls out of
+   slot 4 is vaulted. The window is always exactly four weeks wide.
+
+   The anchor is derived from the newest row in the log rather than the wall
+   clock, so server and client always agree and the window follows the data.
+   ──────────────────────────────────────────────────────────────────────── */
+
+const DAY_MS = 86_400_000
+
+function toMs(iso: string) {
+  const [y, m, d] = iso.split("-").map(Number)
+  return Date.UTC(y, m - 1, d)
+}
+
+function toIso(ms: number) {
+  return new Date(ms).toISOString().slice(0, 10)
+}
+
+export function shiftDays(iso: string, days: number) {
+  return toIso(toMs(iso) + days * DAY_MS)
+}
+
+/** Monday (UTC) of the week containing `iso`. */
+export function mondayOf(iso: string) {
+  const ms = toMs(iso)
+  const back = (new Date(ms).getUTCDay() + 6) % 7
+  return toIso(ms - back * DAY_MS)
+}
+
+export const WEEK_SLOTS = 4
+
+export type ProviderTally = Record<RepoReview["host"], number>
+
+export type WeekSlot = {
+  /** 1 = freshest ingest, 4 = about to roll into the vault. */
+  slot: number
+  start: string
+  end: string
+  /** Airings that landed in this week, before crossover dedupe. */
+  airings: RepoReview[]
+  /** Rows that survived dedupe and are attributed to this week. */
+  kept: number
+  providers: ProviderTally
+}
+
+export type VaultWeek = {
+  start: string
+  end: string
+  /** Mondays ago this week was pushed out of the live window. */
+  rolledOut: number
+  airings: RepoReview[]
+  providers: ProviderTally
+}
+
+export type RollingWindow = {
+  /** The Monday this window was last rebuilt on. */
+  anchor: string
+  /** The Monday the next roll happens on. */
+  nextRoll: string
+  weeks: WeekSlot[]
+  /** Deduped live rows across all four weeks, newest first. */
+  active: DedupedRepo[]
+  /** Already collected but not yet promoted — lands in Week 1 on `nextRoll`. */
+  staging: RepoReview[]
+  /** Weeks that have rolled out of the window, newest first. */
+  vaulted: VaultWeek[]
+  crossoversCut: number
+}
+
+function tally(rows: RepoReview[]): ProviderTally {
+  const t: ProviderTally = { Eisenberg: 0, Peacock: 0, Warner: 0 }
+  for (const r of rows) t[r.host] += 1
+  return t
+}
+
+export function buildWindow(log: RepoReview[]): RollingWindow {
+  const newest = log.reduce((max, r) => (r.date > max ? r.date : max), log[0].date)
+  const anchor = mondayOf(newest)
+
+  // Week 1 is the week that closed the day before the anchor Monday.
+  const bounds = Array.from({ length: WEEK_SLOTS }, (_, i) => {
+    const start = shiftDays(anchor, -7 * (i + 1))
+    return { slot: i + 1, start, end: shiftDays(start, 6) }
+  })
+  const windowStart = bounds[WEEK_SLOTS - 1].start
+
+  const staging = log.filter((r) => r.date >= anchor).sort((a, b) => (a.date < b.date ? 1 : -1))
+  const inWindow = log.filter((r) => r.date >= windowStart && r.date < anchor)
+  const rolledOff = log.filter((r) => r.date < windowStart)
+
+  const active = dedupeReviews(inWindow)
+  const keptByWeek = new Map<string, number>()
+  for (const r of active) {
+    const k = mondayOf(r.date)
+    keptByWeek.set(k, (keptByWeek.get(k) ?? 0) + 1)
+  }
+
+  const weeks: WeekSlot[] = bounds.map((b) => {
+    const airings = inWindow
+      .filter((r) => r.date >= b.start && r.date <= b.end)
+      .sort((a, b2) => (a.date < b2.date ? 1 : -1))
+    return {
+      slot: b.slot,
+      start: b.start,
+      end: b.end,
+      airings,
+      kept: keptByWeek.get(b.start) ?? 0,
+      providers: tally(airings),
+    }
+  })
+
+  const vaultBuckets = new Map<string, RepoReview[]>()
+  for (const r of rolledOff) {
+    const k = mondayOf(r.date)
+    const list = vaultBuckets.get(k)
+    if (list) list.push(r)
+    else vaultBuckets.set(k, [r])
+  }
+  const vaulted: VaultWeek[] = [...vaultBuckets.entries()]
+    .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+    .map(([start, airings]) => ({
+      start,
+      end: shiftDays(start, 6),
+      rolledOut: Math.round((toMs(windowStart) - toMs(start)) / (7 * DAY_MS)),
+      airings: airings.sort((a, b) => (a.date < b.date ? 1 : -1)),
+      providers: tally(airings),
+    }))
+
+  return {
+    anchor,
+    nextRoll: shiftDays(anchor, 7),
+    weeks,
+    active,
+    staging,
+    vaulted,
+    crossoversCut: inWindow.length - active.length,
+  }
+}
+
+/** Which live week slot a row belongs to, or 0 if it is outside the window. */
+export function slotOf(win: RollingWindow, iso: string) {
+  const m = mondayOf(iso)
+  return win.weeks.find((w) => w.start === m)?.slot ?? 0
+}
+
+export function weekRangeLabel(w: { start: string; end: string }) {
+  return `${formatDate(w.start)} – ${formatDate(w.end)}`
+}

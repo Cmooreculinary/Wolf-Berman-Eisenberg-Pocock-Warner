@@ -41,7 +41,7 @@ const NAV: {
     group: "Core",
     items: [
       { id: "inventory", label: "Inventory", icon: Bot, caption: "Agents, methods, protocols" },
-      { id: "repos", label: "Repos reviewed", icon: GitBranch, caption: "Last 30 days, deduped" },
+      { id: "repos", label: "Repos reviewed", icon: GitBranch, caption: "Rolling 4 weeks" },
       { id: "toolbox", label: "Toolbox", icon: Wrench, caption: "Founder instruments" },
       { id: "vault", label: "Vault", icon: Library, caption: "Audio & documents" },
     ],
