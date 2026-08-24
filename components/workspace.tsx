@@ -5,6 +5,7 @@ import {
   Aperture,
   Bot,
   GitBranch,
+  GraduationCap,
   LayoutDashboard,
   Library,
   Moon,
@@ -21,6 +22,7 @@ import { VaultView } from "@/components/views/vault"
 import { DeckView } from "@/components/views/deck"
 import { ReposView } from "@/components/views/repos"
 import { FoundersView } from "@/components/views/founders"
+import { SkillsView } from "@/components/views/skills"
 import { cn } from "@/lib/utils"
 
 type ViewId =
@@ -28,6 +30,7 @@ type ViewId =
   | "blueprint"
   | "inventory"
   | "repos"
+  | "skills"
   | "toolbox"
   | "vault"
   | "deck"
@@ -49,6 +52,7 @@ const NAV: {
     items: [
       { id: "inventory", label: "Inventory", icon: Bot, caption: "Agents, methods, protocols" },
       { id: "repos", label: "Repos reviewed", icon: GitBranch, caption: "Rolling 4 weeks" },
+      { id: "skills", label: "Skills covered", icon: GraduationCap, caption: "Curriculum, last month" },
       { id: "toolbox", label: "Toolbox", icon: Wrench, caption: "Founder instruments" },
       { id: "vault", label: "Vault", icon: Library, caption: "Audio & documents" },
     ],
@@ -70,6 +74,7 @@ const TITLES: Record<ViewId, string> = {
   blueprint: "2026 Blueprint",
   inventory: "Technical Core",
   repos: "Repos Reviewed",
+  skills: "Skills Covered",
   toolbox: "Founder Toolbox",
   vault: "Masterclass Vault",
   deck: "Slide Deck",
@@ -232,6 +237,7 @@ export function Workspace() {
               {view === "blueprint" && <BlueprintView />}
               {view === "inventory" && <InventoryView />}
               {view === "repos" && <ReposView />}
+              {view === "skills" && <SkillsView />}
               {view === "toolbox" && <ToolboxView />}
               {view === "vault" && <VaultView />}
               {view === "deck" && <DeckView />}
