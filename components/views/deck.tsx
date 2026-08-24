@@ -79,7 +79,7 @@ export function DeckView() {
               </ul>
             ) : null}
             <div className="mt-auto flex items-end justify-between pt-4 font-mono text-[10px] text-muted-foreground">
-              <span className="uppercase tracking-[0.14em]">Blue Collar Appz Co. · bcappz.com</span>
+              <span className="uppercase tracking-[0.14em]">Eisenberg, Peacock &amp; Warner</span>
               <span>
                 {slide.n} / {SLIDES.length}
               </span>

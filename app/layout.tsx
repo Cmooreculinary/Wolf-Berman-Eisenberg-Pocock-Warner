@@ -14,9 +14,9 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Builders Sentinel — Blue Collar Appz Co.',
+  title: 'Eisenberg, Peacock & Warner — Rolling 4-Week Intelligence',
   description:
-    'A rolling four-week intelligence window on Eisenberg, Peacock and Warner: repos reviewed with crossovers cut, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built from the work by Blue Collar Appz Co.',
+    'Eisenberg, Peacock & Warner: a rolling four-week window on the three feeds worth a founder\'s whole week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built by Blue Collar Appz Co.',
   generator: 'v0.app',
   icons: {
     icon: [

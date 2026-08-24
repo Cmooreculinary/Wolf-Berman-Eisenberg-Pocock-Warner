@@ -109,16 +109,18 @@ export function Workspace() {
       {/* menu bar */}
       <div className="sticky top-0 z-30 flex h-7 items-center gap-4 border-b border-border/70 mac-glass px-4 text-[12px] text-muted-foreground">
         <span aria-hidden className="h-3 w-4 shrink-0 bca-hatch" />
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-foreground">
+          Eisenberg, Peacock &amp; Warner
+        </span>
+        <span className="hidden text-border-strong sm:inline">/</span>
         <a
           href="https://bcappz.com"
           target="_blank"
           rel="noreferrer"
-          className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-foreground hover:text-accent"
+          className="hidden hover:text-foreground sm:inline"
         >
-          Blue Collar Appz
+          a Blue Collar Appz build
         </a>
-        <span className="hidden text-border-strong sm:inline">/</span>
-        <span className="hidden sm:inline">Builders Sentinel</span>
         <div className="ml-auto flex items-center gap-3">
           <button onClick={() => setLight((l) => !l)} aria-label="Toggle appearance" className="hover:text-foreground">
             {light ? <Moon className="size-3.5" /> : <Sun className="size-3.5" />}
@@ -137,7 +139,21 @@ export function Workspace() {
               <span className="size-3 rounded-full bg-accent" />
               <span className="size-3 rounded-full bg-chart-3/70" />
             </div>
-            <nav className="scroll-slim flex-1 overflow-auto px-2.5 pb-3">
+
+            {/* masthead — the name is the hook */}
+            <div className="border-y border-sidebar-border px-4 py-3.5">
+              <div className="flex items-baseline gap-1.5 text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
+                <span>Eisenberg,</span>
+              </div>
+              <div className="text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
+                Peacock <span className="text-accent">&amp;</span> Warner
+              </div>
+              <div className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted-foreground">
+                Rolling 4-week intelligence
+              </div>
+            </div>
+
+            <nav className="scroll-slim flex-1 overflow-auto px-2.5 pb-3 pt-3">
               {NAV.map((g) => (
                 <div key={g.group} className="mb-4">
                   <div className="px-2.5 pb-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
@@ -196,7 +212,7 @@ export function Workspace() {
               <div className="min-w-0">
                 <div className="truncate text-[13px] font-semibold tracking-tight">{TITLES[view]}</div>
                 <div className="truncate text-[11px] text-muted-foreground">
-                  Blue Collar Appz Co. — watching Eisenberg, Peacock &amp; Warner
+                  Eisenberg, Peacock &amp; Warner — built by Blue Collar Appz Co.
                 </div>
               </div>
               <div className="ml-auto hidden items-center gap-1 md:flex">
