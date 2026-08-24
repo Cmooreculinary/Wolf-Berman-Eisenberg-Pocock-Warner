@@ -1,33 +1,38 @@
-# sentinel
+# Eisenberg, Peacock & Warner
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+A rolling four-week intelligence window on the three feeds worth a founder's whole week —
+agents, governance, distribution. Built by Blue Collar Appz Co.
 
-## Built with v0
+## What's in it
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+- **Convergence** — the three pillars and what sits under each.
+- **Repos reviewed** — every repo the three covered, on a four-week board that rolls every Monday. Crossovers are deduped to one row per repo, and weeks that age out land in the vault instead of being deleted.
+- **Skills covered** — the same window applied to the teaching curriculum: what was taught, by whom, and which repos were on screen.
+- **Blueprint** — the ACP funnel simulator (audience → community → product, with affiliate rev-share).
+- **Inventory / Toolbox / Vault** — the technical core, the founder instruments, and the source documents.
+- **Deck** — a 13-slide summary, exportable to `.pptx`.
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_C2Y2oJJjpfucsWZ20ZN8eVoeUWDF)
+## Data model
 
-## Getting Started
+`lib/repos.ts` holds `REVIEW_LOG`, one row per airing, and is the single source of truth for
+episode numbers, hosts, titles, and air dates. `EPISODES` folds that log into one row per
+episode; `lib/skills.ts` resolves its lesson dates through it rather than writing them down a
+second time, so the repo board and the curriculum can never disagree about when an episode aired.
+Both views anchor their four-week window on the newest row in the log rather than the wall clock,
+so the server and the client always compute the same window.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Built with v0
 
-## Learn More
+This repository is linked to a [v0](https://v0.app) project — start new chats there and v0 pushes
+commits directly to this repo. Every merge to `main` deploys.
 
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+[Continue working on v0 →](https://v0.app/chat/projects/prj_C2Y2oJJjpfucsWZ20ZN8eVoeUWDF)

@@ -447,7 +447,7 @@ export const REVIEW_LOG: RepoReview[] = [
     blurb: "Build-integrity level spec. Reviewed as the compliance vocabulary auditors already accept.",
     pillar: "governance",
     lang: "Docs",
-    license: "Apache-2.0",
+    license: "CommunitySpec-1.0 / Apache-2.0",
     website: "https://slsa.dev/",
     ep: 201,
     host: "Eisenberg",
@@ -561,10 +561,11 @@ export const REVIEW_LOG: RepoReview[] = [
   {
     repo: "katalon-studio/katalon-studio",
     name: "Katalon Studio",
-    blurb: "Test automation platform behind the Katalon MCP; reviewed for its QA-gating hooks into CI.",
+    blurb:
+      "Test automation platform behind the Katalon MCP; reviewed for its QA-gating hooks into CI. The only closed-source name on the board — free tier, paid Runtime Engine.",
     pillar: "governance",
     lang: "Groovy",
-    license: "Apache-2.0",
+    license: "Proprietary",
     website: "https://katalon.com/",
     ep: 195,
     host: "Peacock",
@@ -691,7 +692,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-08",
   },
   {
-    repo: "mendableai/firecrawl",
+    repo: "firecrawl/firecrawl",
     name: "Firecrawl",
     blurb: "Crawl-to-markdown for LLM ingestion. Powers the Reddit unbundling scans and AI-SEO corpus builds.",
     pillar: "media",
@@ -782,7 +783,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-07-30",
   },
   {
-    repo: "flowiseai/Flowise",
+    repo: "FlowiseAI/Flowise",
     name: "Flowise",
     blurb: "Visual agent builder. Reviewed as the handoff artifact for non-technical community operators.",
     pillar: "media",
@@ -834,6 +835,33 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-07-26",
   },
 ]
+
+export type EpisodeMeta = {
+  ep: number
+  host: RepoReview["host"]
+  epTitle: string
+  /** ISO date the episode aired. */
+  date: string
+}
+
+/**
+ * One row per episode, folded out of the review log. The log is the only place
+ * an air date is written down; everything else that needs one — the skills
+ * curriculum in particular — resolves it through here, so the two can never
+ * drift into disagreeing about when an episode aired.
+ */
+export const EPISODES: Record<number, EpisodeMeta> = (() => {
+  const out: Record<number, EpisodeMeta> = {}
+  for (const r of REVIEW_LOG) {
+    out[r.ep] ??= { ep: r.ep, host: r.host, epTitle: r.epTitle, date: r.date }
+  }
+  return out
+})()
+
+/** Air date for an episode, or `undefined` if it is not in the log. */
+export function episodeDate(ep: number) {
+  return EPISODES[ep]?.date
+}
 
 export type DedupedRepo = RepoReview & {
   /** Superseded airings that the crossover rule deleted, newest first. */

@@ -29,6 +29,11 @@ export function ConvergenceView() {
     n: INVENTORY.filter((i) => i.pillar === p.id).length,
   }))
 
+  // counted off the inventory, so the headline numbers cannot drift from it
+  const agents = INVENTORY.filter((i) => i.kind === "agent").length
+  const methods = INVENTORY.filter((i) => i.kind === "skill").length
+  const protocols = INVENTORY.filter((i) => i.kind === "protocol").length
+
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
       <header className="max-w-3xl">
@@ -70,10 +75,10 @@ export function ConvergenceView() {
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Convergence
             </span>
-            <span className="mt-1 text-center text-[15px] font-semibold leading-tight tracking-tight">
-              Builders
+            <span className="mt-1 text-center text-[13px] font-semibold leading-tight tracking-[-0.03em]">
+              Eisenberg,
               <br />
-              Sentinel
+              Peacock &amp; Warner
             </span>
             <span className="mt-2 h-px w-8 bg-accent" />
           </div>
@@ -126,9 +131,9 @@ export function ConvergenceView() {
       </div>
 
       <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Autonomous agents" value="14" sub="specialized machine roles" emphasis />
-        <Stat label="Core methods" value="10" sub="documented techniques" />
-        <Stat label="Protocol surfaces" value="4" sub="MCP, Datalog, SSE" />
+        <Stat label="Autonomous agents" value={String(agents)} sub="specialized machine roles" emphasis />
+        <Stat label="Core methods" value={String(methods)} sub="documented techniques" />
+        <Stat label="Protocol surfaces" value={String(protocols)} sub="MCP, Datalog, SSE" />
         <Stat label="Human FTEs" value="0" sub="verification is automated" />
       </div>
     </div>
