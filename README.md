@@ -1,33 +1,37 @@
-# sentinel
+# Eisenberg, Peacock & Warner
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+A Next.js application providing a rolling four-week intelligence workspace.
 
-## Built with v0
+## Local development
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+Requirements:
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_C2Y2oJJjpfucsWZ20ZN8eVoeUWDF)
-
-## Getting Started
-
-First, run the development server:
+- Node.js 22
+- pnpm 10
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+corepack enable
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-## Learn More
+```bash
+pnpm build
+pnpm start
+```
 
-To learn more, take a look at the following resources:
+## Render deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+The repository includes a `render.yaml` Blueprint for a Render Node web service.
+
+1. In Render, choose **New > Blueprint**.
+2. Connect `Cmooreculinary/Eisenberg-Peacock-Warner`.
+3. Render detects `render.yaml`; review the service and apply the Blueprint.
+4. Confirm the first deployment passes its `/` health check.
+5. Add any future secrets in the Render dashboard, never in this repository.
+
+The service builds with the committed pnpm lockfile, binds to Render's `PORT` on `0.0.0.0`, and automatically deploys changes merged to `main`.
