@@ -4,10 +4,11 @@ import { useMemo, useState } from "react"
 import { ArrowUpRight, Archive, Code2, Globe, Inbox, Play, Search } from "lucide-react"
 import {
   buildWindow,
-  episodeUrl,
   formatDate,
   PILLAR_LABEL,
   PILLAR_SHORT,
+  providerChannelUrl,
+  providerDisplayName,
   repoUrl,
   REVIEW_LOG,
   slotOf,
@@ -187,7 +188,7 @@ function Row({ r, slot }: { r: DedupedRepo; slot: number }) {
           <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">{r.repo}</p>
         </div>
         <div className="flex shrink-0 flex-wrap items-center gap-1.5">
-          <LinkPill href={episodeUrl(r)} icon={Play} label={`Ep ${r.ep}`} tone="accent" />
+          <LinkPill href={providerChannelUrl(r.host)} icon={Play} label={providerDisplayName(r.host)} tone="accent" />
           <LinkPill href={repoUrl(r)} icon={Code2} label="Repo" />
           <LinkPill href={r.website} icon={Globe} label="Site" />
         </div>
@@ -225,12 +226,12 @@ function Row({ r, slot }: { r: DedupedRepo; slot: number }) {
                   <span className="line-through">{formatDate(d.date)}</span>
                   <span className="line-through">&ldquo;{d.epTitle}&rdquo;</span>
                   <a
-                    href={episodeUrl(d)}
+                    href={providerChannelUrl(d.host)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-accent underline underline-offset-2"
                   >
-                    listen
+                    source channel
                   </a>
                 </li>
               ))}
@@ -269,13 +270,14 @@ function VaultBlock({ w }: { w: VaultWeek }) {
           {w.airings.map((r) => (
             <li key={`${r.repo}-${r.ep}`} className="flex flex-wrap items-center gap-2 text-[11px]">
               <span className="font-mono text-muted-foreground">{r.repo}</span>
+              <span className="font-mono text-muted-foreground">Ep {r.ep}</span>
               <a
-                href={episodeUrl(r)}
+                href={providerChannelUrl(r.host)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent underline underline-offset-2"
               >
-                Ep {r.ep}
+                source
               </a>
               <a
                 href={repoUrl(r)}
@@ -335,9 +337,9 @@ export function ReposView() {
     const body = rows
       .map(
         ({ r, slot }) =>
-          `| W${slot} | ${r.name} | ${PILLAR_SHORT[r.pillar]} | ${r.host} | [Ep ${r.ep} — ${r.epTitle}](${episodeUrl(
-            r,
-          )}) | ${formatDate(r.date)} | ${repoUrl(r)} | ${r.website} |`,
+          `| W${slot} | ${r.name} | ${PILLAR_SHORT[r.pillar]} | [${providerDisplayName(r.host)}](${providerChannelUrl(
+            r.host,
+          )}) | Ep ${r.ep} — ${r.epTitle} | ${formatDate(r.date)} | ${repoUrl(r)} | ${r.website} |`,
       )
       .join("\n")
     return `${head}\n${body}`
@@ -357,7 +359,7 @@ export function ReposView() {
       "date",
       "repo_url",
       "website",
-      "episode_url",
+      "provider_channel_url",
       "duplicates_removed",
     ]
     const lines = rows.map(({ r, slot }) =>
@@ -373,7 +375,7 @@ export function ReposView() {
         r.date,
         repoUrl(r),
         r.website,
-        episodeUrl(r),
+        providerChannelUrl(r.host),
         String(r.removed.length),
       ]
         .map(esc)
@@ -509,13 +511,14 @@ export function ReposView() {
               <li key={`${r.repo}-${r.ep}`} className="flex flex-wrap items-center gap-2 text-[11px]">
                 <span className="font-mono text-muted-foreground">{r.repo}</span>
                 <Chip tone="outline">{r.host}</Chip>
+                <span className="font-mono text-muted-foreground">Ep {r.ep}</span>
                 <a
-                  href={episodeUrl(r)}
+                  href={providerChannelUrl(r.host)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent underline underline-offset-2"
                 >
-                  Ep {r.ep}
+                  source
                 </a>
                 <a
                   href={repoUrl(r)}
@@ -556,7 +559,7 @@ export function ReposView() {
       <Panel className="bg-secondary/40">
         <PanelHeader
           title="Ingest contract"
-          hint="The window anchors to the newest row in the log, so it advances the moment Monday's batch lands — server and client always compute the same four weeks. Repository and website links point at canonical upstream URLs; episode links resolve through the show's search rather than a hardcoded video id, so nothing here can rot into a dead link. Wiring the actual Monday cron needs a database and a scheduled route; say the word and I'll add it."
+          hint="The window anchors to the newest row in the log, so it advances the moment Monday's batch lands — server and client always compute the same four weeks. Repository and website links point at canonical upstream URLs. Because the current log does not store canonical video IDs, provider links go to each verified source channel and episode references remain plainly labeled instead of posing as direct video links."
         />
       </Panel>
     </div>
