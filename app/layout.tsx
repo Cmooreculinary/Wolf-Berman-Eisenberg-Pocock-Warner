@@ -16,7 +16,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Eisenberg, Peacock & Warner — Rolling 4-Week Intelligence',
   description:
-    'Eisenberg, Peacock & Warner: a rolling four-week window on the three feeds worth a founder\'s whole week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built by Blue Collar Appz Co.',
+    'Eisenberg, Peacock & Warner: my desert island pick for the top three sources, all in one place, with a new week added every Friday. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built by Blue Collar Appz Co.',
   generator: 'v0.app',
   icons: {
     icon: [

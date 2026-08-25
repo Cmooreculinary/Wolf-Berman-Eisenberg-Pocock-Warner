@@ -48,7 +48,7 @@ export const PILLARS = [
 ]
 
 export const SOURCE_NOTE =
-  "Eisenberg, Peacock and Warner are the three best rooms I have found for a founder who is new to this game. Most outlets serve a leisurely meal — forty minutes of preamble wrapped around one usable idea. These three go straight at the work: agents, compliance, distribution. Down and dirty, pure information. This agent holds the same standard, which is why nothing here is padded."
+  "I do not have a background in tech. I have found quite a few good places to go for information, but this is my desert island pick for the top three. Together, they cover the range of topics and provide the resources I need most. This is the place to get all three in one place. Every Friday, a new week will be added."
 
 export const INVENTORY: InventoryItem[] = [
   {

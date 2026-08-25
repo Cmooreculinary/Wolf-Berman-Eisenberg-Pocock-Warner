@@ -70,10 +70,10 @@ export function ConvergenceView() {
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Convergence
             </span>
-            <span className="mt-1 text-center text-[15px] font-semibold leading-tight tracking-tight">
-              Builders
+            <span className="mt-1 text-center text-[13px] font-semibold leading-tight tracking-tight">
+              Eisenberg,
               <br />
-              Sentinel
+              Peacock <span className="text-accent">&amp;</span> Warner
             </span>
             <span className="mt-2 h-px w-8 bg-accent" />
           </div>
