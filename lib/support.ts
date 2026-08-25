@@ -24,8 +24,15 @@ export type SupportProvider =
   | "custom"
 
 export const SUPPORT = {
-  provider: "paypal" as SupportProvider,
-  /** Paste your donation link here to turn the button on. */
+  provider: "stripe" as SupportProvider,
+  /**
+   * Paste your Stripe Payment Link here to turn the button on, e.g.
+   * "https://buy.stripe.com/xxxxxxxx".
+   *
+   * Create it in the Stripe Dashboard under Payment Links, and set the
+   * price to "Customer chooses what to pay" so any amount is accepted.
+   * Set a low minimum (or none) — small gifts are the point.
+   */
   url: "",
   /** Suggested amounts. Any amount is accepted — these are only shortcuts. */
   presets: [5, 10, 25, 50],
