@@ -1,4 +1,4 @@
-# Eisenberg, Peacock & Warner
+# Eisenberg, Pocock & Warner
 
 A Next.js application providing a rolling four-week intelligence workspace.
 
@@ -29,7 +29,7 @@ pnpm start
 The repository includes a `render.yaml` Blueprint for a Render Node web service.
 
 1. In Render, choose **New > Blueprint**.
-2. Connect `Cmooreculinary/Eisenberg-Peacock-Warner`.
+2. Connect `Cmooreculinary/Eisenberg-Pocock-Warner`.
 3. Render detects `render.yaml`; review the service and apply the Blueprint.
 4. Confirm the first deployment passes its `/` health check.
 5. Add any future secrets in the Render dashboard, never in this repository.

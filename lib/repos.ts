@@ -11,7 +11,7 @@ export type RepoReview = {
   website: string
   /** Episode this review aired in. */
   ep: number
-  host: "Eisenberg" | "Peacock" | "Warner"
+  host: "Eisenberg" | "Pocock" | "Warner"
   epTitle: string
   /** ISO date the review aired. */
   date: string
@@ -35,7 +35,7 @@ export const PILLAR_SHORT: Record<RepoPillar, string> = {
  * `episodeUrl` for canonical permalinks once the show's episode index is wired in.
  */
 export function episodeUrl(r: RepoReview) {
-  const q = `Eisenberg Peacock Warner ${r.host} episode ${r.ep} ${r.name}`
+  const q = `Eisenberg Pocock Warner ${r.host} episode ${r.ep} ${r.name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }
 
@@ -84,7 +84,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://www.crewai.com/",
     ep: 213,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Fourteen roles, zero FTEs",
     date: "2026-08-19",
   },
@@ -97,7 +97,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://microsoft.github.io/autogen/",
     ep: 213,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Fourteen roles, zero FTEs",
     date: "2026-08-19",
   },
@@ -162,7 +162,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://learn.microsoft.com/semantic-kernel/",
     ep: 210,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Enterprise-grade or bust",
     date: "2026-08-12",
   },
@@ -175,7 +175,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://www.llamaindex.ai/",
     ep: 210,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Enterprise-grade or bust",
     date: "2026-08-12",
   },
@@ -227,7 +227,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://browser-use.com/",
     ep: 207,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Machines that click",
     date: "2026-07-27",
   },
@@ -240,7 +240,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://e2b.dev/",
     ep: 207,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Machines that click",
     date: "2026-07-27",
   },
@@ -292,7 +292,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://www.litellm.ai/",
     ep: 205,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Small models, hard limits",
     date: "2026-08-03",
   },
@@ -305,7 +305,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Sustainable Use",
     website: "https://n8n.io/",
     ep: 205,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Small models, hard limits",
     date: "2026-08-03",
   },
@@ -528,7 +528,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://garak.ai/",
     ep: 196,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Red team the swarm",
     date: "2026-08-15",
   },
@@ -541,7 +541,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://azure.github.io/PyRIT/",
     ep: 196,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Red team the swarm",
     date: "2026-08-15",
   },
@@ -554,7 +554,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://playwright.dev/",
     ep: 195,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "QA at machine speed",
     date: "2026-08-13",
   },
@@ -567,7 +567,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://katalon.com/",
     ep: 195,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "QA at machine speed",
     date: "2026-08-13",
   },
@@ -580,7 +580,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT",
     website: "https://promptfoo.dev/",
     ep: 195,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "QA at machine speed",
     date: "2026-08-13",
   },
@@ -621,7 +621,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "MIT / EE",
     website: "https://langfuse.com/",
     ep: 193,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Meter every token",
     date: "2026-08-11",
   },
@@ -634,7 +634,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Elastic-2.0",
     website: "https://phoenix.arize.com/",
     ep: 193,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Meter every token",
     date: "2026-08-11",
   },
@@ -699,7 +699,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "AGPL-3.0",
     website: "https://www.firecrawl.dev/",
     ep: 191,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Unbundling Reddit",
     date: "2026-08-16",
   },
@@ -712,7 +712,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://crawl4ai.com/",
     ep: 191,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Unbundling Reddit",
     date: "2026-08-16",
   },
@@ -725,7 +725,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://gptr.dev/",
     ep: 191,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Unbundling Reddit",
     date: "2026-08-16",
   },
@@ -738,7 +738,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "AGPL-3.0",
     website: "https://cal.com/",
     ep: 190,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Own the channel",
     date: "2026-08-04",
   },
@@ -751,7 +751,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://supabase.com/",
     ep: 190,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "Own the channel",
     date: "2026-08-04",
   },
@@ -803,7 +803,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://docs.ragas.io/",
     ep: 186,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "AI SEO, measured",
     date: "2026-07-26",
   },
@@ -816,7 +816,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://unstructured.io/",
     ep: 186,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "AI SEO, measured",
     date: "2026-07-26",
   },
@@ -829,7 +829,7 @@ export const REVIEW_LOG: RepoReview[] = [
     license: "Apache-2.0",
     website: "https://qdrant.tech/",
     ep: 186,
-    host: "Peacock",
+    host: "Pocock",
     epTitle: "AI SEO, measured",
     date: "2026-07-26",
   },
@@ -947,7 +947,7 @@ export type RollingWindow = {
 }
 
 function tally(rows: RepoReview[]): ProviderTally {
-  const t: ProviderTally = { Eisenberg: 0, Peacock: 0, Warner: 0 }
+  const t: ProviderTally = { Eisenberg: 0, Pocock: 0, Warner: 0 }
   for (const r of rows) t[r.host] += 1
   return t
 }

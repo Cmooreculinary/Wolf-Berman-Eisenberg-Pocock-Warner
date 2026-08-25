@@ -48,7 +48,7 @@ export const PILLARS = [
 ]
 
 export const SOURCE_NOTE =
-  "Eisenberg, Peacock and Warner are the three best rooms I have found for a founder who is new to this game. Most outlets serve a leisurely meal — forty minutes of preamble wrapped around one usable idea. These three go straight at the work: agents, compliance, distribution. Down and dirty, pure information. This agent holds the same standard, which is why nothing here is padded."
+  "Eisenberg, Pocock and Warner are the three best rooms I have found for a founder who is new to this game. Most outlets serve a leisurely meal — forty minutes of preamble wrapped around one usable idea. These three go straight at the work: agents, compliance, distribution. Down and dirty, pure information. This agent holds the same standard, which is why nothing here is padded."
 
 export const INVENTORY: InventoryItem[] = [
   {
@@ -478,7 +478,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d4",
     title: "ACP Funnel Operating Manual",
-    source: "Eisenberg, Peacock & Warner",
+    source: "Eisenberg, Pocock & Warner",
     pages: 26,
     summary:
       "Audience, Community, Product with owned-channel math, 40–50% affiliate rev-share mechanics, and a 5x ARR exit model.",
@@ -486,7 +486,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d5",
     title: "Agent Swarm Reference Architecture",
-    source: "Eisenberg, Peacock & Warner",
+    source: "Eisenberg, Pocock & Warner",
     pages: 31,
     summary:
       "Role definitions for all 14 agents, circuit-breaker thresholds, deterministic loop hashing, and the egress gate contract.",
@@ -494,7 +494,7 @@ export const DOCS: DocItem[] = [
   {
     id: "d6",
     title: "Work-Product Privilege in Agent Pipelines",
-    source: "Eisenberg, Peacock & Warner",
+    source: "Eisenberg, Pocock & Warner",
     pages: 15,
     summary:
       "How to tag privileged material at ingestion so autonomous agents cannot waive protection by publishing derived output.",
@@ -505,7 +505,7 @@ export const SLIDES = [
   {
     n: 1,
     kicker: "Rolling 4-Week Intelligence",
-    title: "Eisenberg, Peacock & Warner",
+    title: "Eisenberg, Pocock & Warner",
     body: "A 2026 operating system for autonomous agents, zero-trust governance, and owned distribution.",
     bullets: [],
   },
