@@ -2,7 +2,7 @@ import { mondayOf, shiftDays, type RepoPillar } from "./repos"
 
 export type SkillTier = "foundational" | "working" | "advanced"
 
-export type SkillHost = "Eisenberg" | "Peacock" | "Warner"
+export type SkillHost = "Eisenberg" | "Pocock" | "Warner"
 
 /** One time a skill was actually taught on air. */
 export type SkillLesson = {
@@ -73,8 +73,8 @@ export const SKILLS: Skill[] = [
       "Split work across specialised agents with explicit handoff contracts, and know when one good agent beats a committee of five.",
     pitfall: "Adding agents to fix a quality problem. Coordination overhead grows faster than capability does.",
     lessons: [
-      { host: "Peacock", ep: 213, date: "2026-07-29", demos: ["CrewAI"] },
-      { host: "Peacock", ep: 213, date: "2026-08-19", demos: ["AutoGen"] },
+      { host: "Pocock", ep: 213, date: "2026-07-29", demos: ["CrewAI"] },
+      { host: "Pocock", ep: 213, date: "2026-08-19", demos: ["AutoGen"] },
       { host: "Warner", ep: 212, date: "2026-08-19", demos: ["OpenAI Agents SDK", "Swarm (archived)"] },
     ],
   },
@@ -89,7 +89,7 @@ export const SKILLS: Skill[] = [
     lessons: [
       { host: "Warner", ep: 211, date: "2026-08-14", demos: ["AI SDK"] },
       { host: "Warner", ep: 211, date: "2026-08-17", demos: ["Pydantic AI"] },
-      { host: "Peacock", ep: 210, date: "2026-08-14", demos: ["Semantic Kernel"] },
+      { host: "Pocock", ep: 210, date: "2026-08-14", demos: ["Semantic Kernel"] },
     ],
   },
   {
@@ -113,7 +113,7 @@ export const SKILLS: Skill[] = [
     outcome:
       "Execute generated code in a disposable sandbox with no ambient credentials, a wall-clock limit, and deny-by-default egress.",
     pitfall: "Letting an agent shell out on your machine. One bad command is all it takes.",
-    lessons: [{ host: "Peacock", ep: 207, date: "2026-07-27", demos: ["E2B"] }],
+    lessons: [{ host: "Pocock", ep: 207, date: "2026-07-27", demos: ["E2B"] }],
   },
   {
     id: "browser-agents",
@@ -123,7 +123,7 @@ export const SKILLS: Skill[] = [
     outcome:
       "Automate a site that has no API, and understand why a screenshot-and-click loop is slower and flakier than reading the accessibility tree.",
     pitfall: "Selecting by CSS class. The next deploy renames it and your agent goes blind.",
-    lessons: [{ host: "Peacock", ep: 207, date: "2026-08-10", demos: ["Browser Use"] }],
+    lessons: [{ host: "Pocock", ep: 207, date: "2026-08-10", demos: ["Browser Use"] }],
   },
   {
     id: "coding-agents",
@@ -147,8 +147,8 @@ export const SKILLS: Skill[] = [
       "Chunk on document structure, pick a distance metric on purpose, and measure recall before you blame the model for hallucinating.",
     pitfall: "Fixed 512-token chunks that cut tables in half, then concluding the model is bad at reasoning.",
     lessons: [
-      { host: "Peacock", ep: 210, date: "2026-08-12", demos: ["LlamaIndex"] },
-      { host: "Peacock", ep: 186, date: "2026-07-26", demos: ["Qdrant", "Unstructured"] },
+      { host: "Pocock", ep: 210, date: "2026-08-12", demos: ["LlamaIndex"] },
+      { host: "Pocock", ep: 186, date: "2026-07-26", demos: ["Qdrant", "Unstructured"] },
     ],
   },
   {
@@ -159,7 +159,7 @@ export const SKILLS: Skill[] = [
     outcome:
       "Put one gateway in front of every model, then move traffic to a cheaper model per route without touching application code.",
     pitfall: "Hardcoding one provider SDK everywhere, so a price change becomes a refactor.",
-    lessons: [{ host: "Peacock", ep: 205, date: "2026-08-21", demos: ["LiteLLM"] }],
+    lessons: [{ host: "Pocock", ep: 205, date: "2026-08-21", demos: ["LiteLLM"] }],
   },
   {
     id: "visual-orchestration",
@@ -171,7 +171,7 @@ export const SKILLS: Skill[] = [
     pitfall: "Running the business on a flow nobody can code-review, test, or roll back.",
     lessons: [
       { host: "Warner", ep: 189, date: "2026-07-30", demos: ["Flowise"] },
-      { host: "Peacock", ep: 205, date: "2026-08-03", demos: ["n8n"] },
+      { host: "Pocock", ep: 205, date: "2026-08-03", demos: ["n8n"] },
     ],
   },
 
@@ -244,8 +244,8 @@ export const SKILLS: Skill[] = [
       "Run adversarial probes as a build step and track which attack classes your system fails, instead of waiting for a user to find them.",
     pitfall: "Testing only the happy path, then meeting prompt injection for the first time in production.",
     lessons: [
-      { host: "Peacock", ep: 196, date: "2026-08-01", demos: ["garak"] },
-      { host: "Peacock", ep: 196, date: "2026-08-15", demos: ["PyRIT"] },
+      { host: "Pocock", ep: 196, date: "2026-08-01", demos: ["garak"] },
+      { host: "Pocock", ep: 196, date: "2026-08-15", demos: ["PyRIT"] },
     ],
   },
   {
@@ -305,8 +305,8 @@ export const SKILLS: Skill[] = [
       "Score prompt and model changes against a fixed dataset in CI, so you can prove a change was an improvement rather than a vibe.",
     pitfall: "Shipping a prompt tweak on the strength of three manual spot checks.",
     lessons: [
-      { host: "Peacock", ep: 195, date: "2026-08-13", demos: ["promptfoo", "Katalon Studio"] },
-      { host: "Peacock", ep: 186, date: "2026-08-02", demos: ["Ragas"] },
+      { host: "Pocock", ep: 195, date: "2026-08-13", demos: ["promptfoo", "Katalon Studio"] },
+      { host: "Pocock", ep: 186, date: "2026-08-02", demos: ["Ragas"] },
     ],
   },
   {
@@ -318,8 +318,8 @@ export const SKILLS: Skill[] = [
       "Capture spans for every model call, tool call, and retry, then answer what a run cost and where the latency went.",
     pitfall: "Debugging an agent from console output. You cannot reconstruct a failed run you never traced.",
     lessons: [
-      { host: "Peacock", ep: 193, date: "2026-08-11", demos: ["Phoenix"] },
-      { host: "Peacock", ep: 193, date: "2026-08-24", demos: ["Langfuse"] },
+      { host: "Pocock", ep: 193, date: "2026-08-11", demos: ["Phoenix"] },
+      { host: "Pocock", ep: 193, date: "2026-08-24", demos: ["Langfuse"] },
     ],
   },
   {
@@ -330,7 +330,7 @@ export const SKILLS: Skill[] = [
     outcome:
       "Drive your app by accessible role and label so tests break when behaviour breaks, not when a class name changes.",
     pitfall: "A suite so brittle the team starts skipping it, which is the same as not having one.",
-    lessons: [{ host: "Peacock", ep: 195, date: "2026-08-15", demos: ["Playwright"] }],
+    lessons: [{ host: "Pocock", ep: 195, date: "2026-08-15", demos: ["Playwright"] }],
   },
   {
     id: "programmatic-video",
@@ -355,8 +355,8 @@ export const SKILLS: Skill[] = [
       "Crawl and normalise sources into clean structured text on your own schedule, with rate limits and failure handling you set.",
     pitfall: "Depending on a scraping API that changes terms, and losing the corpus your product is built on.",
     lessons: [
-      { host: "Peacock", ep: 191, date: "2026-08-08", demos: ["Firecrawl"] },
-      { host: "Peacock", ep: 191, date: "2026-08-16", demos: ["Crawl4AI", "GPT Researcher"] },
+      { host: "Pocock", ep: 191, date: "2026-08-08", demos: ["Firecrawl"] },
+      { host: "Pocock", ep: 191, date: "2026-08-16", demos: ["Crawl4AI", "GPT Researcher"] },
     ],
   },
   {
@@ -368,8 +368,8 @@ export const SKILLS: Skill[] = [
       "Ship a genuinely useful free tool as the top of the funnel, and measure it on qualified signups rather than impressions.",
     pitfall: "Renting attention monthly. The moment you stop paying, the pipeline resets to zero.",
     lessons: [
-      { host: "Peacock", ep: 190, date: "2026-08-04", demos: ["Supabase"] },
-      { host: "Peacock", ep: 190, date: "2026-08-16", demos: ["Cal.com"] },
+      { host: "Pocock", ep: 190, date: "2026-08-04", demos: ["Supabase"] },
+      { host: "Pocock", ep: 190, date: "2026-08-16", demos: ["Cal.com"] },
     ],
   },
   {
@@ -435,7 +435,7 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
   const covered: CoveredSkill[] = []
   const dormant: Skill[] = []
   let lessonCount = 0
-  const hostTally: Record<SkillHost, number> = { Eisenberg: 0, Peacock: 0, Warner: 0 }
+  const hostTally: Record<SkillHost, number> = { Eisenberg: 0, Pocock: 0, Warner: 0 }
 
   for (const s of skills) {
     const taught = s.lessons
@@ -468,6 +468,6 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
 }
 
 export function lessonUrl(name: string, l: SkillLesson) {
-  const q = `Eisenberg Peacock Warner ${l.host} episode ${l.ep} ${name}`
+  const q = `Eisenberg Pocock Warner ${l.host} episode ${l.ep} ${name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }
