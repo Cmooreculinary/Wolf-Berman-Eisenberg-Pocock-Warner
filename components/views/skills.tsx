@@ -20,7 +20,7 @@ type TierFilter = SkillTier | "all"
 
 const HOST_ABBR: Record<SkillHost, string> = {
   Eisenberg: "EIS",
-  Peacock: "PEA",
+  Pocock: "PEA",
   Warner: "WAR",
 }
 
@@ -161,7 +161,7 @@ export function SkillsView() {
       [
         `# Skills covered — ${range}`,
         "",
-        `${rows.length} skills · ${cur.lessonCount} lessons · Eisenberg, Peacock & Warner`,
+        `${rows.length} skills · ${cur.lessonCount} lessons · Eisenberg, Pocock & Warner`,
         "",
         "| Skill | Pillar | Tier | Hosts | Last taught | Shown with |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -214,7 +214,7 @@ export function SkillsView() {
         <Stat label="Lessons" value={String(cur.lessonCount)} sub="airings that taught one" />
         <Stat
           label="Taught by"
-          value={`${cur.hostTally.Eisenberg}/${cur.hostTally.Peacock}/${cur.hostTally.Warner}`}
+          value={`${cur.hostTally.Eisenberg}/${cur.hostTally.Pocock}/${cur.hostTally.Warner}`}
           sub="EIS / PEA / WAR"
         />
         <Stat
