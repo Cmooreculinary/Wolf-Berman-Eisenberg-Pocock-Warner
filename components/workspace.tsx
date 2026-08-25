@@ -64,7 +64,7 @@ const NAV: {
   {
     group: "Shop",
     items: [
-      { id: "founders", label: "Founder's note", icon: PenLine, caption: "Trench philosophy" },
+      { id: "founders", label: "Founder's note", icon: PenLine, caption: "Why this exists" },
     ],
   },
 ]
