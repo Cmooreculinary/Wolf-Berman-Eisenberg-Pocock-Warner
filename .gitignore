@@ -17,3 +17,6 @@ node_modules
 # Next.js generated types
 next-env.d.ts
 *.tsbuildinfo
+
+# Static export output
+out/

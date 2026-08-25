@@ -8,6 +8,11 @@ This repository is linked to a [v0](https://v0.app) project. You can continue de
 
 [Continue working on v0 →](https://v0.app/chat/projects/prj_C2Y2oJJjpfucsWZ20ZN8eVoeUWDF)
 
+## Deploying
+
+This site is a static export and deploys free on Render — see [RENDER.md](RENDER.md).
+The existing Vercel/v0 deploy keeps working unchanged.
+
 ## Getting Started
 
 First, run the development server:

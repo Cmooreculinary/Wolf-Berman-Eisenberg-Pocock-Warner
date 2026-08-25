@@ -1,0 +1,31 @@
+# Render Blueprint — Eisenberg, Peacock & Warner
+#
+# Deploys as a STATIC SITE, not a web service. Every route in this app is
+# prerendered, so there is no server to keep running: Render's static plan
+# serves the built HTML from its CDN, costs nothing, and never sleeps.
+#
+# To deploy: Render Dashboard -> New -> Blueprint -> pick this repo.
+# Render reads this file and creates the site. See RENDER.md for the manual
+# (no-blueprint) equivalent.
+services:
+  - type: web
+    runtime: static
+    name: eisenberg-peacock-warner
+    # Corepack ships the pnpm version pinned in package.json.
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && STATIC_EXPORT=true pnpm build
+    staticPublishPath: ./out
+    # next.config.mjs applies these itself when Next is serving; a static
+    # export has no server, so Render sends them.
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=63072000
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
