@@ -38,7 +38,7 @@ export function ConvergenceView() {
         <h1 className="mt-4 text-[40px] font-semibold leading-[1.02] tracking-[-0.045em] text-balance sm:text-[56px]">
           Eisenberg,
           <br />
-          Peacock <span className="text-accent">&amp;</span> Warner
+          Pocock <span className="text-accent">&amp;</span> Warner
         </h1>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
