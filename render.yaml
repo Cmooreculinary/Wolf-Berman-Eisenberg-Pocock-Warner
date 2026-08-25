@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: eisenberg-peacock-warner
+    name: eisenberg-pocock-warner
     runtime: node
     branch: main
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
