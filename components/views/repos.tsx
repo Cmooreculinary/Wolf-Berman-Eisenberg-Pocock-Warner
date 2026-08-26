@@ -29,6 +29,8 @@ const PROVIDERS: Array<{ key: keyof ProviderTally; short: string }> = [
   { key: "Eisenberg", short: "Eis" },
   { key: "Pocock", short: "Pea" },
   { key: "Warner", short: "War" },
+  { key: "Wolfe", short: "Wol" },
+  { key: "Berman", short: "Ber" },
 ]
 
 function LinkPill({
@@ -394,7 +396,7 @@ export function ReposView() {
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground text-pretty">
           Every Monday the agent ingests the week that just closed and files it as Week&nbsp;1. Each surviving
           week shifts down a slot and whatever falls out of Week&nbsp;4 is vaulted. The live board is always
-          exactly four weeks of Eisenberg, Pocock and Warner coverage &mdash; never more, never less.
+          exactly four weeks of Eisenberg, Pocock, Warner, Wolfe and Berman coverage &mdash; never more, never less.
         </p>
       </header>
 
