@@ -11,7 +11,7 @@ export type RepoReview = {
   website: string
   /** Episode this review aired in. */
   ep: number
-  host: "Eisenberg" | "Pocock" | "Warner"
+  host: "Eisenberg" | "Pocock" | "Warner" | "Wolfe" | "Berman"
   epTitle: string
   /** ISO date the review aired. */
   date: string
@@ -35,7 +35,7 @@ export const PILLAR_SHORT: Record<RepoPillar, string> = {
  * `episodeUrl` for canonical permalinks once the show's episode index is wired in.
  */
 export function episodeUrl(r: RepoReview) {
-  const q = `Eisenberg Pocock Warner ${r.host} episode ${r.ep} ${r.name}`
+  const q = `Eisenberg Pocock Warner Matt Wolfe Matthew Berman ${r.host} episode ${r.ep} ${r.name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }
 
@@ -947,7 +947,7 @@ export type RollingWindow = {
 }
 
 function tally(rows: RepoReview[]): ProviderTally {
-  const t: ProviderTally = { Eisenberg: 0, Pocock: 0, Warner: 0 }
+  const t: ProviderTally = { Eisenberg: 0, Pocock: 0, Warner: 0, Wolfe: 0, Berman: 0 }
   for (const r of rows) t[r.host] += 1
   return t
 }
