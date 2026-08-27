@@ -43,7 +43,7 @@ const NAV: {
   {
     group: "Thesis",
     items: [
-      { id: "convergence", label: "Convergence", icon: Aperture, caption: "Three sources, three pillars" },
+      { id: "convergence", label: "Convergence", icon: Aperture, caption: "Five sources, three pillars" },
       { id: "blueprint", label: "Blueprint", icon: LayoutDashboard, caption: "ACP engine & risk model" },
     ],
   },
@@ -110,7 +110,7 @@ export function Workspace() {
       <div className="sticky top-0 z-30 flex h-7 items-center gap-4 border-b border-border/70 mac-glass px-4 text-[12px] text-muted-foreground">
         <span aria-hidden className="h-3 w-4 shrink-0 bca-hatch" />
         <span className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-foreground">
-          Eisenberg, Peacock &amp; Warner
+          Eisenberg, Pocock, Warner, Wolfe &amp; Berman
         </span>
         <span className="hidden text-border-strong sm:inline">/</span>
         <a
@@ -143,10 +143,10 @@ export function Workspace() {
             {/* masthead — the name is the hook */}
             <div className="border-y border-sidebar-border px-4 py-3.5">
               <div className="flex items-baseline gap-1.5 text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-                <span>Eisenberg,</span>
+                <span>Eisenberg, Pocock,</span>
               </div>
               <div className="text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-                Peacock <span className="text-accent">&amp;</span> Warner
+                Warner, Wolfe <span className="text-accent">&amp;</span> Berman
               </div>
               <div className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted-foreground">
                 Rolling 4-week intelligence
@@ -212,7 +212,7 @@ export function Workspace() {
               <div className="min-w-0">
                 <div className="truncate text-[13px] font-semibold tracking-tight">{TITLES[view]}</div>
                 <div className="truncate text-[11px] text-muted-foreground">
-                  Eisenberg, Peacock &amp; Warner — built by Blue Collar Appz Co.
+                  Eisenberg, Pocock, Warner, Wolfe &amp; Berman — built by Blue Collar Appz Co.
                 </div>
               </div>
               <div className="ml-auto hidden items-center gap-1 md:flex">

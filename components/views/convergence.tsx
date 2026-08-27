@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Bot, ShieldCheck, Radio, ArrowRight } from "lucide-react"
-import { PILLARS, SOURCE_NOTE, INVENTORY } from "@/lib/data"
+import { PILLARS, SOURCE_FEEDS, SOURCE_NOTE, INVENTORY } from "@/lib/data"
 import { Panel, Chip, Stat } from "@/components/kit"
 import { cn } from "@/lib/utils"
 
@@ -41,12 +41,28 @@ export function ConvergenceView() {
 
         {/* the name is the hook — it carries the page */}
         <h1 className="mt-4 text-[40px] font-semibold leading-[1.02] tracking-[-0.045em] text-balance sm:text-[56px]">
-          Eisenberg,
+          Eisenberg, Pocock, Warner,
           <br />
-          Peacock <span className="text-accent">&amp;</span> Warner
+          Wolfe <span className="text-accent">&amp;</span> Berman
         </h1>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
+
+        <ul className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+          {SOURCE_FEEDS.map((source) => (
+            <li key={source.name}>
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full rounded-lg border border-border bg-card/60 p-3 transition-colors hover:border-accent/50 hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span className="text-[12px] font-semibold tracking-tight">{source.name}</span>
+                <span className="mt-1 block text-[10px] leading-relaxed text-muted-foreground">{source.focus}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
         <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
           <span className="text-accent">Commended</span>
@@ -75,10 +91,12 @@ export function ConvergenceView() {
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Convergence
             </span>
-            <span className="mt-1 text-center text-[13px] font-semibold leading-tight tracking-[-0.03em]">
-              Eisenberg,
+            <span className="mt-1 text-center text-[11px] font-semibold leading-[1.25] tracking-[-0.03em]">
+              Eisenberg, Pocock,
               <br />
-              Peacock &amp; Warner
+              Warner, Wolfe
+              <br />
+              &amp; Berman
             </span>
             <span className="mt-2 h-px w-8 bg-accent" />
           </div>
