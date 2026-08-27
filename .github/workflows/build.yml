@@ -1,0 +1,44 @@
+# Builds the site the way Render builds it, then proves the machine-readable
+# half survived. A broken export is invisible in review — the pages render fine
+# while every integration 404s — so it is checked here rather than in a browser.
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Enable pnpm
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Types
+        run: pnpm exec tsc --noEmit
+
+      - name: Build static export
+        run: STATIC_EXPORT=true pnpm build
+
+      - name: Every endpoint published and parseable
+        run: pnpm check:export
+
+      - name: MCP server answers over stdio
+        run: |
+          printf '%s\n' \
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' \
+            '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
+            '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_overview","arguments":{}}}' \
+          | EPWWB_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
+          | tee /dev/stderr \
+          | grep -q 'Rolling four-week intelligence'

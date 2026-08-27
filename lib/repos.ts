@@ -21,12 +21,16 @@ const PROVIDER_CHANNEL: Record<RepoReview["host"], string> = {
   Eisenberg: "https://www.youtube.com/@GregIsenberg/videos",
   Pocock: "https://www.youtube.com/@mattpocockuk/videos",
   Warner: "https://www.youtube.com/@TheNextNewThingAI/videos",
+  Wolfe: "https://www.youtube.com/@mreflow/videos",
+  Berman: "https://www.youtube.com/@matthew_berman/videos",
 }
 
 const PROVIDER_NAME: Record<RepoReview["host"], string> = {
   Eisenberg: "Greg Isenberg",
   Pocock: "Matt Pocock",
   Warner: "Andrew Warner",
+  Wolfe: "Matt Wolfe",
+  Berman: "Matthew Berman",
 }
 
 export const PILLAR_LABEL: Record<RepoPillar, string> = {
