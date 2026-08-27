@@ -13,9 +13,7 @@ const plexMono = IBM_Plex_Mono({
   variable: '--font-plex-mono',
 })
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://eisenberg-pocock-warner-wolfe-berman.onrender.com')
+import { SITE_URL } from '@/lib/site-config'
 
 const TITLE = 'Eisenberg, Pocock, Warner, Wolfe & Berman — Rolling 4-Week Intelligence'
 const DESCRIPTION =
