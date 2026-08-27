@@ -20,7 +20,7 @@ type TierFilter = SkillTier | "all"
 
 const HOST_ABBR: Record<SkillHost, string> = {
   Eisenberg: "EIS",
-  Pocock: "PEA",
+  Pocock: "POC",
   Warner: "WAR",
   Wolfe: "WOL",
   Berman: "BER",
@@ -217,7 +217,7 @@ export function SkillsView() {
         <Stat
           label="Taught by"
           value={`${cur.hostTally.Eisenberg}/${cur.hostTally.Pocock}/${cur.hostTally.Warner}/${cur.hostTally.Wolfe}/${cur.hostTally.Berman}`}
-          sub="EIS / PEA / WAR"
+          sub="EIS / POC / WAR / WOL / BER"
         />
         <Stat
           label="This week"
