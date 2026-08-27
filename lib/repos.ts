@@ -17,6 +17,18 @@ export type RepoReview = {
   date: string
 }
 
+const PROVIDER_CHANNEL: Record<RepoReview["host"], string> = {
+  Eisenberg: "https://www.youtube.com/@GregIsenberg/videos",
+  Pocock: "https://www.youtube.com/@mattpocockuk/videos",
+  Warner: "https://www.youtube.com/@TheNextNewThingAI/videos",
+}
+
+const PROVIDER_NAME: Record<RepoReview["host"], string> = {
+  Eisenberg: "Greg Isenberg",
+  Pocock: "Matt Pocock",
+  Warner: "Andrew Warner",
+}
+
 export const PILLAR_LABEL: Record<RepoPillar, string> = {
   agents: "Agent Autonomy & Swarms",
   governance: "Zero-Trust Governance & Legal",
@@ -30,13 +42,16 @@ export const PILLAR_SHORT: Record<RepoPillar, string> = {
 }
 
 /**
- * Episode links resolve through the show's YouTube/social search rather than a
- * hardcoded video id, so no link in this table can rot into a dead URL. Swap
- * `episodeUrl` for canonical permalinks once the show's episode index is wired in.
+ * The review log does not contain canonical video IDs. Send readers to the
+ * verified provider channel instead of pretending a search result is an
+ * episode permalink.
  */
-export function episodeUrl(r: RepoReview) {
-  const q = `Eisenberg Pocock Warner Matt Wolfe Matthew Berman ${r.host} episode ${r.ep} ${r.name}`
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
+export function providerChannelUrl(host: RepoReview["host"]) {
+  return PROVIDER_CHANNEL[host]
+}
+
+export function providerDisplayName(host: RepoReview["host"]) {
+  return PROVIDER_NAME[host]
 }
 
 export function repoUrl(r: RepoReview) {
@@ -134,7 +149,7 @@ export const REVIEW_LOG: RepoReview[] = [
     pillar: "agents",
     lang: "Python",
     license: "MIT",
-    website: "https://ai.pydantic.dev/",
+    website: "https://pydantic.dev/docs/ai/overview/",
     ep: 211,
     host: "Warner",
     epTitle: "Types are the cheapest guardrail",
@@ -180,13 +195,13 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-12",
   },
   {
-    repo: "All-Hands-AI/OpenHands",
+    repo: "OpenHands/OpenHands",
     name: "OpenHands",
     blurb: "Autonomous software engineer with a sandboxed runtime — the +76% code-surge machine in the flesh.",
     pillar: "agents",
     lang: "Python",
     license: "MIT",
-    website: "https://www.all-hands.dev/",
+    website: "https://www.openhands.dev/",
     ep: 209,
     host: "Warner",
     epTitle: "7,839 lines a month",
@@ -351,7 +366,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-07-26",
   },
   {
-    repo: "microsoft/presidio",
+    repo: "data-privacy-stack/presidio",
     name: "Presidio",
     blurb: "NER-driven PII detection and anonymization — the exact scrubbing method in our technical core.",
     pillar: "governance",
@@ -364,7 +379,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-22",
   },
   {
-    repo: "microsoft/presidio",
+    repo: "data-privacy-stack/presidio",
     name: "Presidio",
     blurb: "First pass, recognizer registry and custom entity patterns for privileged legal text.",
     pillar: "governance",
@@ -447,7 +462,7 @@ export const REVIEW_LOG: RepoReview[] = [
     blurb: "Build-integrity level spec. Reviewed as the compliance vocabulary auditors already accept.",
     pillar: "governance",
     lang: "Docs",
-    license: "Apache-2.0",
+    license: "CommunitySpec-1.0 / Apache-2.0",
     website: "https://slsa.dev/",
     ep: 201,
     host: "Eisenberg",
@@ -494,13 +509,13 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-07",
   },
   {
-    repo: "NVIDIA/NeMo-Guardrails",
+    repo: "NVIDIA-NeMo/Guardrails",
     name: "NeMo Guardrails",
     blurb: "Colang-defined dialogue rails. Reviewed as the runtime refusal layer, not a substitute for policy.",
     pillar: "governance",
     lang: "Python",
     license: "Apache-2.0",
-    website: "https://github.com/NVIDIA/NeMo-Guardrails",
+    website: "https://github.com/NVIDIA-NeMo/Guardrails",
     ep: 197,
     host: "Eisenberg",
     epTitle: "Rails, not vibes",
@@ -561,10 +576,11 @@ export const REVIEW_LOG: RepoReview[] = [
   {
     repo: "katalon-studio/katalon-studio",
     name: "Katalon Studio",
-    blurb: "Test automation platform behind the Katalon MCP; reviewed for its QA-gating hooks into CI.",
+    blurb:
+      "Test automation platform behind the Katalon MCP; reviewed for its QA-gating hooks into CI. The only closed-source name on the board — free tier, paid Runtime Engine.",
     pillar: "governance",
     lang: "Groovy",
-    license: "Apache-2.0",
+    license: "Proprietary",
     website: "https://katalon.com/",
     ep: 195,
     host: "Pocock",
@@ -578,7 +594,7 @@ export const REVIEW_LOG: RepoReview[] = [
     pillar: "governance",
     lang: "TypeScript",
     license: "MIT",
-    website: "https://promptfoo.dev/",
+    website: "https://www.promptfoo.dev/",
     ep: 195,
     host: "Pocock",
     epTitle: "QA at machine speed",
@@ -604,7 +620,7 @@ export const REVIEW_LOG: RepoReview[] = [
     pillar: "governance",
     lang: "TypeScript",
     license: "MIT",
-    website: "https://modelcontextprotocol.io/",
+    website: "https://modelcontextprotocol.io/docs/getting-started/intro",
     ep: 204,
     host: "Eisenberg",
     epTitle: "Policy is a logic program",
@@ -632,20 +648,20 @@ export const REVIEW_LOG: RepoReview[] = [
     pillar: "media",
     lang: "Python",
     license: "Elastic-2.0",
-    website: "https://phoenix.arize.com/",
+    website: "https://arize.com/phoenix/",
     ep: 193,
     host: "Pocock",
     epTitle: "Meter every token",
     date: "2026-08-11",
   },
   {
-    repo: "comfyanonymous/ComfyUI",
+    repo: "Comfy-Org/ComfyUI",
     name: "ComfyUI",
     blurb: "Node-graph diffusion pipeline. The procedural worldbuilding and HDR grading rig for vertical microdramas.",
     pillar: "media",
     lang: "Python",
     license: "GPL-3.0",
-    website: "https://www.comfy.org/",
+    website: "https://comfy.org/",
     ep: 192,
     host: "Warner",
     epTitle: "Microdramas at scale",
@@ -691,7 +707,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-08",
   },
   {
-    repo: "mendableai/firecrawl",
+    repo: "firecrawl/firecrawl",
     name: "Firecrawl",
     blurb: "Crawl-to-markdown for LLM ingestion. Powers the Reddit unbundling scans and AI-SEO corpus builds.",
     pillar: "media",
@@ -710,7 +726,7 @@ export const REVIEW_LOG: RepoReview[] = [
     pillar: "media",
     lang: "Python",
     license: "Apache-2.0",
-    website: "https://crawl4ai.com/",
+    website: "https://docs.crawl4ai.com/",
     ep: 191,
     host: "Pocock",
     epTitle: "Unbundling Reddit",
@@ -730,7 +746,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-16",
   },
   {
-    repo: "calcom/cal.com",
+    repo: "calcom/cal.diy",
     name: "Cal.com",
     blurb: "Scheduling infrastructure. Studied as the canonical unbundle-then-own-the-channel playbook.",
     pillar: "media",
@@ -782,7 +798,7 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-07-30",
   },
   {
-    repo: "flowiseai/Flowise",
+    repo: "FlowiseAI/Flowise",
     name: "Flowise",
     blurb: "Visual agent builder. Reviewed as the handoff artifact for non-technical community operators.",
     pillar: "media",
@@ -795,13 +811,13 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-08-02",
   },
   {
-    repo: "explodinggradients/ragas",
+    repo: "vibrantlabsai/ragas",
     name: "Ragas",
     blurb: "Retrieval eval metrics. Keeps the AI-SEO corpus honest as it grows past human review capacity.",
     pillar: "media",
     lang: "Python",
     license: "Apache-2.0",
-    website: "https://docs.ragas.io/",
+    website: "https://docs.ragas.io/en/stable/",
     ep: 186,
     host: "Pocock",
     epTitle: "AI SEO, measured",
@@ -834,6 +850,33 @@ export const REVIEW_LOG: RepoReview[] = [
     date: "2026-07-26",
   },
 ]
+
+export type EpisodeMeta = {
+  ep: number
+  host: RepoReview["host"]
+  epTitle: string
+  /** ISO date the episode aired. */
+  date: string
+}
+
+/**
+ * One row per episode, folded out of the review log. The log is the only place
+ * an air date is written down; everything else that needs one — the skills
+ * curriculum in particular — resolves it through here, so the two can never
+ * drift into disagreeing about when an episode aired.
+ */
+export const EPISODES: Record<number, EpisodeMeta> = (() => {
+  const out: Record<number, EpisodeMeta> = {}
+  for (const r of REVIEW_LOG) {
+    out[r.ep] ??= { ep: r.ep, host: r.host, epTitle: r.epTitle, date: r.date }
+  }
+  return out
+})()
+
+/** Air date for an episode, or `undefined` if it is not in the log. */
+export function episodeDate(ep: number) {
+  return EPISODES[ep]?.date
+}
 
 export type DedupedRepo = RepoReview & {
   /** Superseded airings that the crossover rule deleted, newest first. */

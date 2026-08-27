@@ -51,7 +51,8 @@ export default function RootLayout({
     <html lang="en" className={`${dmSans.variable} ${plexMono.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {/* Vercel sets VERCEL=1 during its builds; on Render the script would 404. */}
+        {process.env.NODE_ENV === 'production' && process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
   )

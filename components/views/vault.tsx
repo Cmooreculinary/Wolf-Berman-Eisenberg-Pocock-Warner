@@ -1,46 +1,27 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import { Play, Pause, FileText, Download } from "lucide-react"
+import { useMemo, useState } from "react"
+import { ExternalLink, FileText, Download } from "lucide-react"
 import { AUDIO, DOCS } from "@/lib/data"
 import { Panel, PanelHeader, Chip, Segmented, CopyButton } from "@/components/kit"
 import { cn } from "@/lib/utils"
 
 const BARS = 44
 
-function mmss(total: number) {
-  const m = Math.floor(total / 60)
-  const s = Math.floor(total % 60)
-  return `${m}:${s.toString().padStart(2, "0")}`
+function sessionSearchUrl(session: (typeof AUDIO)[number]) {
+  const query = `${session.speaker} ${session.title}`
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
 }
 
 export function VaultView() {
   const [speaker, setSpeaker] = useState<"all" | "Avinash Kaushik" | "Bryan Eisenberg">("all")
   const [activeId, setActiveId] = useState(AUDIO[0].id)
-  const [playing, setPlaying] = useState(false)
-  const [elapsed, setElapsed] = useState(0)
-  const raf = useRef<number | null>(null)
 
   const list = useMemo(() => (speaker === "all" ? AUDIO : AUDIO.filter((a) => a.speaker === speaker)), [speaker])
   const active = AUDIO.find((a) => a.id === activeId)!
-  const duration = active.minutes * 60
-
-  useEffect(() => {
-    if (!playing) return
-    const id = window.setInterval(() => {
-      setElapsed((e) => (e + 1 >= duration ? 0 : e + 1))
-    }, 250)
-    return () => window.clearInterval(id)
-  }, [playing, duration])
-
-  useEffect(() => () => { if (raf.current) cancelAnimationFrame(raf.current) }, [])
-
-  const progress = elapsed / duration
 
   function select(id: string) {
     setActiveId(id)
-    setElapsed(0)
-    setPlaying(true)
   }
 
   return (
@@ -54,41 +35,45 @@ export function VaultView() {
 
       <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)]">
         <Panel className="p-0">
-          {/* now playing */}
+          {/* selected session */}
           <div className="border-b border-border p-5">
             <div className="flex items-start gap-4">
-              <button
-                onClick={() => setPlaying((p) => !p)}
-                aria-label={playing ? "Pause" : "Play"}
+              <a
+                href={sessionSearchUrl(active)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Search YouTube for ${active.title}`}
                 className="grid size-12 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform active:scale-95"
               >
-                {playing ? <Pause className="size-5" /> : <Play className="size-5 translate-x-px" />}
-              </button>
+                <ExternalLink className="size-5" />
+              </a>
               <div className="min-w-0 flex-1">
                 <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                  {active.speaker} · {active.topic}
+                  Selected session · {active.speaker} · {active.topic}
                 </div>
                 <h2 className="mt-0.5 truncate text-[16px] font-semibold tracking-tight">{active.title}</h2>
                 <div className="mt-3 flex h-8 items-end gap-[3px]" aria-hidden="true">
                   {Array.from({ length: BARS }).map((_, i) => {
-                    const played = i / BARS <= progress
                     const h = 20 + Math.abs(Math.sin(i * 1.7 + active.minutes)) * 80
                     return (
                       <span
                         key={i}
-                        className={cn(
-                          "flex-1 rounded-full transition-colors",
-                          played ? "bg-accent" : "bg-border",
-                          playing && played && "opacity-90",
-                        )}
+                        className={cn("flex-1 rounded-full", i % 4 === 0 ? "bg-accent/70" : "bg-border")}
                         style={{ height: `${h}%` }}
                       />
                     )
                   })}
                 </div>
-                <div className="mt-2 flex justify-between font-mono text-[11px] tabular-nums text-muted-foreground">
-                  <span>{mmss(elapsed)}</span>
-                  <span>{mmss(duration)}</span>
+                <div className="mt-2 flex justify-between gap-3 font-mono text-[11px] text-muted-foreground">
+                  <span>{active.minutes} minute reference</span>
+                  <a
+                    href={sessionSearchUrl(active)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline underline-offset-2"
+                  >
+                    Search source
+                  </a>
                 </div>
                 <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground text-pretty">
                   <span className="font-medium text-foreground">Takeaway. </span>
