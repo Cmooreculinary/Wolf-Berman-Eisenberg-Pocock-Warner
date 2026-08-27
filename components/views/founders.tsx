@@ -89,7 +89,7 @@ export function FoundersView() {
         </p>
         <p className="text-pretty">
           The standard is simple and it is the whole reason this dashboard exists: I do not trust output I cannot
-          verify, and I do not trust my own memory of what I read last month. So the shop watches the three sources
+          verify, and I do not trust my own memory of what I read last month. So the shop watches the five sources
           worth watching, keeps exactly four weeks, cuts the duplicates, and vaults the rest. Four weeks is long enough
           to see a pattern and short enough that I have to actually decide something.
         </p>

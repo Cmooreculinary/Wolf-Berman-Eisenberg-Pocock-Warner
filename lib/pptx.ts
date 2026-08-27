@@ -15,7 +15,7 @@ export async function exportDeck() {
   pptx.layout = "LAYOUT_16x9"
   pptx.author = "Blue Collar Appz Co."
   pptx.company = "Blue Collar Appz Co. — bcappz.com"
-  pptx.title = "Eisenberg, Pocock & Warner — 2026 AI Venture Blueprint"
+  pptx.title = "Eisenberg, Pocock, Warner, Wolfe & Berman — 2026 AI Venture Blueprint"
 
   for (const s of SLIDES) {
     const slide = pptx.addSlide()
@@ -94,7 +94,7 @@ export async function exportDeck() {
       fontFace: FACE,
     })
 
-    slide.addText("Eisenberg, Pocock & Warner · built by Blue Collar Appz Co.", {
+    slide.addText("Eisenberg, Pocock, Warner, Wolfe & Berman · built by Blue Collar Appz Co.", {
       x: 0.6,
       y: 4.95,
       w: 5,
@@ -105,5 +105,5 @@ export async function exportDeck() {
     })
   }
 
-  await pptx.writeFile({ fileName: "Eisenberg_Pocock_Warner_2026.pptx" })
+  await pptx.writeFile({ fileName: "Eisenberg_Pocock_Warner_Wolfe_Berman_2026.pptx" })
 }

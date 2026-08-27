@@ -2,7 +2,7 @@ import { mondayOf, shiftDays, type RepoPillar } from "./repos"
 
 export type SkillTier = "foundational" | "working" | "advanced"
 
-export type SkillHost = "Eisenberg" | "Pocock" | "Warner"
+export type SkillHost = "Eisenberg" | "Pocock" | "Warner" | "Wolfe" | "Berman"
 
 /** One time a skill was actually taught on air. */
 export type SkillLesson = {
@@ -435,7 +435,7 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
   const covered: CoveredSkill[] = []
   const dormant: Skill[] = []
   let lessonCount = 0
-  const hostTally: Record<SkillHost, number> = { Eisenberg: 0, Pocock: 0, Warner: 0 }
+  const hostTally: Record<SkillHost, number> = { Eisenberg: 0, Pocock: 0, Warner: 0, Wolfe: 0, Berman: 0 }
 
   for (const s of skills) {
     const taught = s.lessons
@@ -468,6 +468,6 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
 }
 
 export function lessonUrl(name: string, l: SkillLesson) {
-  const q = `Eisenberg Pocock Warner ${l.host} episode ${l.ep} ${name}`
+  const q = `Eisenberg Pocock Warner Matt Wolfe Matthew Berman ${l.host} episode ${l.ep} ${name}`
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
 }
