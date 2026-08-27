@@ -14,6 +14,7 @@ import {
   Sun,
   Wrench,
 } from "lucide-react"
+import { DISCLAIMER } from "@/lib/data"
 import { ConvergenceView } from "@/components/views/convergence"
 import { BlueprintView } from "@/components/views/blueprint"
 import { InventoryView } from "@/components/views/inventory"
@@ -259,6 +260,21 @@ export function Workspace() {
               {view === "deck" && <DeckView />}
               {view === "founders" && <FoundersView />}
             </main>
+
+            <footer className="border-t border-border bg-background px-4 py-3">
+              <p className="text-[11px] leading-relaxed text-muted-foreground">
+                {DISCLAIMER}{" "}
+                <a
+                  href="https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-foreground"
+                >
+                  Source on GitHub
+                </a>
+                .
+              </p>
+            </footer>
           </div>
         </div>
       </div>
