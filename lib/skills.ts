@@ -461,7 +461,3 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
   return { anchor, windowStart, windowEnd, covered, dormant, lessonCount, hostTally }
 }
 
-export function lessonUrl(name: string, l: SkillLesson) {
-  const q = `Eisenberg Pocock Warner ${l.host} episode ${l.ep} ${name}`
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
-}

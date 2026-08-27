@@ -3,10 +3,9 @@
 import { useMemo, useState } from "react"
 import { ArrowUpRight, Search } from "lucide-react"
 import { Chip, CopyButton, Panel, PanelHeader, Segmented, Stat } from "@/components/kit"
-import { PILLAR_SHORT, formatDate, weekRangeLabel, type RepoPillar } from "@/lib/repos"
+import { PILLAR_SHORT, formatDate, providerChannelUrl, providerDisplayName, weekRangeLabel, type RepoPillar } from "@/lib/repos"
 import {
   buildCurriculum,
-  lessonUrl,
   TIER_LABEL,
   TIER_ORDER,
   type CoveredSkill,
@@ -104,13 +103,14 @@ function SkillRow({ s }: { s: CoveredSkill }) {
         <ul className="border-t border-border px-3.5 py-2.5">
           {s.taught.map((l) => (
             <li key={`${l.host}-${l.ep}-${l.date}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-1">
+              <span className="font-mono text-[11px] text-muted-foreground">Ep {l.ep}</span>
               <a
-                href={lessonUrl(s.name, l)}
+                href={providerChannelUrl(l.host)}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 font-mono text-[11px] text-accent underline underline-offset-2"
               >
-                Ep {l.ep}
+                {providerDisplayName(l.host)}
                 <ArrowUpRight className="size-3" />
               </a>
               <span className="font-mono text-[11px] text-muted-foreground">{l.host}</span>
