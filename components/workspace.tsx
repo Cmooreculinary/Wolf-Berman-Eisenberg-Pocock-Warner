@@ -10,6 +10,7 @@ import {
   Library,
   Moon,
   PenLine,
+  Plug,
   Presentation,
   Sun,
   Wrench,
@@ -23,6 +24,7 @@ import { DeckView } from "@/components/views/deck"
 import { ReposView } from "@/components/views/repos"
 import { FoundersView } from "@/components/views/founders"
 import { SkillsView } from "@/components/views/skills"
+import { IntegrateView } from "@/components/views/integrate"
 import { cn } from "@/lib/utils"
 
 type ViewId =
@@ -35,6 +37,7 @@ type ViewId =
   | "vault"
   | "deck"
   | "founders"
+  | "integrate"
 
 const NAV: {
   group: string
@@ -62,12 +65,26 @@ const NAV: {
     items: [{ id: "deck", label: "Slide deck", icon: Presentation, caption: "13 slides + .pptx" }],
   },
   {
+    group: "Connect",
+    items: [
+      { id: "integrate", label: "Integrate", icon: Plug, caption: "JSON API, MCP, embeds" },
+    ],
+  },
+  {
     group: "Shop",
     items: [
       { id: "founders", label: "Founder's note", icon: PenLine, caption: "Why this exists" },
     ],
   },
 ]
+
+/** Deep-link surface: every view answers to its own hash. */
+const VIEW_IDS = NAV.flatMap((g) => g.items.map((i) => i.id))
+
+function viewFromHash(): ViewId | null {
+  const id = window.location.hash.replace(/^#/, "")
+  return (VIEW_IDS as string[]).includes(id) ? (id as ViewId) : null
+}
 
 const TITLES: Record<ViewId, string> = {
   convergence: "Convergence",
@@ -79,6 +96,7 @@ const TITLES: Record<ViewId, string> = {
   vault: "Masterclass Vault",
   deck: "Slide Deck",
   founders: "Founder's Note",
+  integrate: "Integrate",
 }
 
 function Clock() {
@@ -99,6 +117,26 @@ export function Workspace() {
   const [view, setView] = useState<ViewId>("convergence")
   // BCA ships dark by default; `light` is the opt-in counterpart.
   const [light, setLight] = useState(false)
+
+  // A link into a view has to survive being shared — with a colleague, or as an
+  // agent's citation — so the open view lives in the URL. Read on mount rather
+  // than during render: the export is prerendered without a hash.
+  useEffect(() => {
+    const sync = () => {
+      const fromHash = viewFromHash()
+      if (fromHash) setView(fromHash)
+    }
+    sync()
+    window.addEventListener("hashchange", sync)
+    return () => window.removeEventListener("hashchange", sync)
+  }, [])
+
+  function go(next: ViewId) {
+    setView(next)
+    if (window.location.hash !== `#${next}`) {
+      window.history.pushState(null, "", `#${next}`)
+    }
+  }
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", light)
@@ -166,7 +204,7 @@ export function Workspace() {
                       return (
                         <li key={it.id}>
                           <button
-                            onClick={() => setView(it.id)}
+                            onClick={() => go(it.id)}
                             aria-current={on}
                             className={cn(
                               "flex w-full items-center gap-2.5 border-l-2 px-2.5 py-2 text-left transition-colors",
@@ -219,7 +257,7 @@ export function Workspace() {
                 {NAV.flatMap((g) => g.items).map((it) => (
                   <button
                     key={it.id}
-                    onClick={() => setView(it.id)}
+                    onClick={() => go(it.id)}
                     aria-label={it.label}
                     className={cn(
                       "grid size-8 place-items-center rounded-lg transition-colors",
@@ -237,7 +275,7 @@ export function Workspace() {
               {NAV.flatMap((g) => g.items).map((it) => (
                 <button
                   key={it.id}
-                  onClick={() => setView(it.id)}
+                  onClick={() => go(it.id)}
                   className={cn(
                     "shrink-0 rounded-full px-3 py-1 text-[12px] font-medium transition-colors",
                     it.id === view ? "bg-secondary text-foreground" : "text-muted-foreground",
@@ -258,6 +296,7 @@ export function Workspace() {
               {view === "vault" && <VaultView />}
               {view === "deck" && <DeckView />}
               {view === "founders" && <FoundersView />}
+              {view === "integrate" && <IntegrateView />}
             </main>
           </div>
         </div>

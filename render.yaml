@@ -29,3 +29,21 @@ services:
       - path: /*
         name: Permissions-Policy
         value: camera=(), microphone=(), geolocation=()
+      # The dataset under /api, plus the discovery files, are public and
+      # read-only: agents and other people's pages are meant to fetch them
+      # cross-origin. Mirrors the headers() block in next.config.mjs.
+      - path: /api/*
+        name: Access-Control-Allow-Origin
+        value: "*"
+      - path: /api/*
+        name: Cache-Control
+        value: public, max-age=300, stale-while-revalidate=86400
+      - path: /.well-known/*
+        name: Access-Control-Allow-Origin
+        value: "*"
+      - path: /openapi.json
+        name: Access-Control-Allow-Origin
+        value: "*"
+      - path: /llms.txt
+        name: Access-Control-Allow-Origin
+        value: "*"

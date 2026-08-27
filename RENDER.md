@@ -11,6 +11,11 @@ the ACP simulator, the .pptx export) all run in the visitor's browser. So there
 is nothing for a server to do at request time, and the whole site is 1.7 MB of
 files Render can serve from its CDN.
 
+The machine-readable dataset is static too. `pnpm api` writes `/api/v1/*.json`,
+`/openapi.json`, `/llms.txt` and `/.well-known/agent.json` into `public/` before
+Next runs, so they are copied into the export like any other asset — the JSON
+endpoints work on the free static plan exactly as they do on Vercel.
+
 `STATIC_EXPORT=true pnpm build` writes those files to `out/`.
 
 ## Option A — Blueprint (recommended)
@@ -34,6 +39,11 @@ The security headers in `render.yaml` (`X-Content-Type-Options`,
 `Referrer-Policy`, `Strict-Transport-Security`, `Permissions-Policy`) are not
 applied in this path — add them under the site's **Headers** tab if you want
 them, using path `/*`.
+
+Add `Access-Control-Allow-Origin: *` on `/api/*`, `/.well-known/*`,
+`/openapi.json` and `/llms.txt` in the same tab, or the JSON endpoints will be
+readable by hand but not from another site's JavaScript. `render.yaml` sets
+these for you on the Blueprint path.
 
 ## Cost
 
@@ -66,3 +76,10 @@ cd out && python3 -m http.server 4173
 ```
 
 Then open <http://localhost:4173> — that is byte-for-byte what Render serves.
+
+```bash
+pnpm check:export
+```
+
+asserts the export actually carries every JSON endpoint. The failure it catches
+is a quiet one: the site renders perfectly while every integration 404s.

@@ -7,9 +7,11 @@
   },
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "api": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-api.mjs",
+    "dev": "pnpm api && next dev",
+    "build": "pnpm api && next build",
+    "start": "next start",
+    "check:export": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-export.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
