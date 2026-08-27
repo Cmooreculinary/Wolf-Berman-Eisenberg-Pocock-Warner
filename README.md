@@ -9,6 +9,17 @@ Requirements:
 - Node.js 22
 - pnpm 10
 
+[Continue working on v0 →](https://v0.app/chat/projects/prj_C2Y2oJJjpfucsWZ20ZN8eVoeUWDF)
+
+## Deploying
+
+This site is a static export and deploys free on Render — see [RENDER.md](RENDER.md).
+The existing Vercel/v0 deploy keeps working unchanged.
+
+## Getting Started
+
+First, run the development server:
+
 ```bash
 corepack enable
 pnpm install --frozen-lockfile
