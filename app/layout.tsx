@@ -13,11 +13,44 @@ const plexMono = IBM_Plex_Mono({
   variable: '--font-plex-mono',
 })
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://eisenberg-pocock-warner-wolfe-berman.onrender.com')
+
+const TITLE = 'Eisenberg, Pocock, Warner, Wolfe & Berman — Rolling 4-Week Intelligence'
+const DESCRIPTION =
+  'Eisenberg, Pocock, Warner, Wolfe & Berman: a rolling four-week window on five founder feeds worth the week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built by Blue Collar Appz Co.'
+
 export const metadata: Metadata = {
-  title: 'Eisenberg, Pocock, Warner, Wolfe & Berman — Rolling 4-Week Intelligence',
-  description:
-    'Eisenberg, Pocock, Warner, Wolfe & Berman: a rolling four-week window on five founder feeds worth the week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Built by Blue Collar Appz Co.',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   generator: 'v0.app',
+  keywords: [
+    'founder intelligence',
+    'ACP funnel',
+    'startup skills',
+    'rolling four-week',
+    'Blue Collar Appz',
+    'Eisenberg',
+    'Pocock',
+    'Warner',
+    'Wolfe',
+    'Berman',
+  ],
+  authors: [{ name: 'Blue Collar Appz Co.' }],
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: 'Eisenberg, Pocock, Warner, Wolfe & Berman',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
   icons: {
     icon: [
       {
