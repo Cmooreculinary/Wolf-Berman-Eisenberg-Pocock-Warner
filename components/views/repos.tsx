@@ -5,8 +5,10 @@ import { ArrowUpRight, Archive, Code2, Globe, Inbox, Play, Search } from "lucide
 import {
   buildWindow,
   formatDate,
+  HOSTS,
   PILLAR_LABEL,
   PILLAR_SHORT,
+  PROVIDER_SHORT,
   providerChannelUrl,
   providerDisplayName,
   repoUrl,
@@ -14,6 +16,7 @@ import {
   slotOf,
   weekRangeLabel,
   type DedupedRepo,
+  type Host,
   type ProviderTally,
   type RepoPillar,
   type RepoReview,
@@ -26,13 +29,10 @@ import { cn } from "@/lib/utils"
 type PillarFilter = "all" | RepoPillar
 type WeekFilter = "all" | "1" | "2" | "3" | "4"
 
-const PROVIDERS: Array<{ key: keyof ProviderTally; short: string }> = [
-  { key: "Eisenberg", short: "Eis" },
-  { key: "Pocock", short: "Pea" },
-  { key: "Warner", short: "War" },
-  { key: "Wolfe", short: "Wol" },
-  { key: "Berman", short: "Ber" },
-]
+const PROVIDERS: Array<{ key: Host; short: string }> = HOSTS.map((key) => ({
+  key,
+  short: PROVIDER_SHORT[key],
+}))
 
 function LinkPill({
   href,
@@ -71,12 +71,27 @@ function ProviderBars({ t, total }: { t: ProviderTally; total: number }) {
         const n = t[p.key]
         const pct = total > 0 ? Math.round((n / total) * 100) : 0
         return (
-          <div key={p.key} className="flex items-center gap-2">
+          <div
+            key={p.key}
+            className="flex items-center gap-2"
+            title={
+              n === 0
+                ? `${providerDisplayName(p.key)} — no airings in this window`
+                : `${providerDisplayName(p.key)} — ${n} airing${n === 1 ? "" : "s"}`
+            }
+          >
             <dt className="w-7 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">{p.short}</dt>
             <div className="h-1 flex-1 overflow-hidden rounded-full bg-border">
               <div className="h-full rounded-full bg-accent/70" style={{ width: `${pct}%` }} />
             </div>
-            <dd className="w-4 text-right font-mono text-[10px] tabular-nums text-muted-foreground">{n}</dd>
+            <dd
+              className={cn(
+                "w-4 text-right font-mono text-[10px] tabular-nums",
+                n === 0 ? "text-muted-foreground/50" : "text-muted-foreground",
+              )}
+            >
+              {n === 0 ? "—" : n}
+            </dd>
           </div>
         )
       })}
@@ -388,6 +403,14 @@ export function ReposView() {
 
   const byPillar = (p: RepoPillar) => win.active.filter((r) => r.pillar === p).length
 
+  /**
+   * How many of the tracked feeds actually aired inside the live window. A feed
+   * can be tracked and still have a quiet four weeks, so this is counted rather
+   * than asserted — the copy below follows the data instead of the roster.
+   */
+  const feedsAiring = HOSTS.filter((h) => win.active.some((r) => r.host === h))
+  const quietFeeds = HOSTS.filter((h) => !feedsAiring.includes(h))
+
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-5 px-6 py-8">
       <header className="max-w-2xl">
@@ -398,7 +421,19 @@ export function ReposView() {
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground text-pretty">
           Every Monday the agent ingests the week that just closed and files it as Week&nbsp;1. Each surviving
           week shifts down a slot and whatever falls out of Week&nbsp;4 is vaulted. The live board is always
-          exactly four weeks of Eisenberg, Pocock, Warner, Wolfe and Berman coverage &mdash; never more, never less.
+          exactly four weeks wide &mdash; never more, never less.
+        </p>
+        <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">
+          {feedsAiring.length} of {HOSTS.length} tracked feeds aired in this window
+          {quietFeeds.length > 0 ? (
+            <>
+              {" — "}
+              {quietFeeds.map((h) => providerDisplayName(h)).join(" and ")}{" "}
+              {quietFeeds.length === 1 ? "has" : "have"} no reviews logged yet.
+            </>
+          ) : (
+            "."
+          )}
         </p>
       </header>
 

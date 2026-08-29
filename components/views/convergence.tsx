@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Bot, ShieldCheck, Radio, ArrowRight } from "lucide-react"
-import { PILLARS, SOURCE_FEEDS, SOURCE_NOTE, INVENTORY } from "@/lib/data"
+import { DISCLAIMER, PILLARS, SOURCE_FEEDS, SOURCE_NOTE, INVENTORY } from "@/lib/data"
 import { Panel, Chip, Stat } from "@/components/kit"
 import { cn } from "@/lib/utils"
 
@@ -63,6 +63,8 @@ export function ConvergenceView() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-3 max-w-2xl text-[11px] leading-relaxed text-muted-foreground">{DISCLAIMER}</p>
 
         <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
           <span className="text-accent">Commended</span>

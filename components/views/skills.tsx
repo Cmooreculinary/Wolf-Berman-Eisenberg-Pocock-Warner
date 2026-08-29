@@ -3,7 +3,16 @@
 import { useMemo, useState } from "react"
 import { ArrowUpRight, Search } from "lucide-react"
 import { Chip, CopyButton, Panel, PanelHeader, Segmented, Stat } from "@/components/kit"
-import { PILLAR_SHORT, formatDate, providerChannelUrl, providerDisplayName, weekRangeLabel, type RepoPillar } from "@/lib/repos"
+import {
+  HOSTS,
+  PILLAR_SHORT,
+  PROVIDER_SHORT,
+  formatDate,
+  providerChannelUrl,
+  providerDisplayName,
+  weekRangeLabel,
+  type RepoPillar,
+} from "@/lib/repos"
 import {
   buildCurriculum,
   TIER_LABEL,
@@ -17,13 +26,10 @@ import { cn } from "@/lib/utils"
 type PillarFilter = RepoPillar | "all"
 type TierFilter = SkillTier | "all"
 
-const HOST_ABBR: Record<SkillHost, string> = {
-  Eisenberg: "EIS",
-  Pocock: "POC",
-  Warner: "WAR",
-  Wolfe: "WOL",
-  Berman: "BER",
-}
+/** Same abbreviations the repo board uses, uppercased for this view. */
+const HOST_ABBR = Object.fromEntries(
+  HOSTS.map((h) => [h, PROVIDER_SHORT[h].toUpperCase()]),
+) as Record<SkillHost, string>
 
 function TierBar({ tier }: { tier: SkillTier }) {
   const filled = tier === "foundational" ? 1 : tier === "working" ? 2 : 3
@@ -163,7 +169,7 @@ export function SkillsView() {
       [
         `# Skills covered — ${range}`,
         "",
-        `${rows.length} skills · ${cur.lessonCount} lessons · Eisenberg, Pocock, Warner, Wolfe & Berman`,
+        `${rows.length} skills · ${cur.lessonCount} lessons · ${HOSTS.join(", ")}`,
         "",
         "| Skill | Pillar | Tier | Hosts | Last taught | Shown with |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -216,8 +222,8 @@ export function SkillsView() {
         <Stat label="Lessons" value={String(cur.lessonCount)} sub="airings that taught one" />
         <Stat
           label="Taught by"
-          value={`${cur.hostTally.Eisenberg}/${cur.hostTally.Pocock}/${cur.hostTally.Warner}/${cur.hostTally.Wolfe}/${cur.hostTally.Berman}`}
-          sub="EIS / POC / WAR / WOL / BER"
+          value={HOSTS.map((h) => cur.hostTally[h]).join("/")}
+          sub={HOSTS.map((h) => HOST_ABBR[h]).join(" / ")}
         />
         <Stat
           label="This week"

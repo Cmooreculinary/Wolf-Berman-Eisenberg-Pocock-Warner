@@ -9,7 +9,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "build:static": "STATIC_EXPORT=true next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "check:data": "tsx scripts/check-data.ts",
+    "check": "pnpm typecheck && pnpm check:data"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -32,11 +36,18 @@
     "@types/react-dom": "^19",
     "postcss": "^8.5",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
     "typescript": "5.7.3"
   },
   "pnpm": {
     "overrides": {
       "hono": "4.12.25"
     }
+  },
+  "license": "MIT",
+  "description": "A rolling four-week intelligence workspace over five public founder feeds.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner.git"
   }
 }

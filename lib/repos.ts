@@ -1,3 +1,12 @@
+/**
+ * Display order for the five feeds. Every host list in the UI derives from
+ * this array, so adding a sixth feed is a one-line change here rather than a
+ * hunt through the views.
+ */
+export const HOSTS = ["Eisenberg", "Pocock", "Warner", "Wolfe", "Berman"] as const
+
+export type Host = (typeof HOSTS)[number]
+
 export type RepoPillar = "agents" | "governance" | "media"
 
 export type RepoReview = {
@@ -11,22 +20,35 @@ export type RepoReview = {
   website: string
   /** Episode this review aired in. */
   ep: number
-  host: "Eisenberg" | "Pocock" | "Warner" | "Wolfe" | "Berman"
+  host: Host
   epTitle: string
   /** ISO date the review aired. */
   date: string
 }
 
-const PROVIDER_CHANNEL: Record<RepoReview["host"], string> = {
+const PROVIDER_CHANNEL: Record<Host, string> = {
   Eisenberg: "https://www.youtube.com/@GregIsenberg/videos",
   Pocock: "https://www.youtube.com/@mattpocockuk/videos",
   Warner: "https://www.youtube.com/@TheNextNewThingAI/videos",
+  Wolfe: "https://www.youtube.com/@mreflow/videos",
+  Berman: "https://www.youtube.com/@matthew_berman/videos",
 }
 
-const PROVIDER_NAME: Record<RepoReview["host"], string> = {
+const PROVIDER_NAME: Record<Host, string> = {
   Eisenberg: "Greg Isenberg",
   Pocock: "Matt Pocock",
   Warner: "Andrew Warner",
+  Wolfe: "Matt Wolfe",
+  Berman: "Matthew Berman",
+}
+
+/** Short column label for the host, used where space is tight. */
+export const PROVIDER_SHORT: Record<Host, string> = {
+  Eisenberg: "Eis",
+  Pocock: "Poc",
+  Warner: "War",
+  Wolfe: "Wol",
+  Berman: "Ber",
 }
 
 export const PILLAR_LABEL: Record<RepoPillar, string> = {
@@ -46,11 +68,11 @@ export const PILLAR_SHORT: Record<RepoPillar, string> = {
  * verified provider channel instead of pretending a search result is an
  * episode permalink.
  */
-export function providerChannelUrl(host: RepoReview["host"]) {
+export function providerChannelUrl(host: Host) {
   return PROVIDER_CHANNEL[host]
 }
 
-export function providerDisplayName(host: RepoReview["host"]) {
+export function providerDisplayName(host: Host) {
   return PROVIDER_NAME[host]
 }
 
@@ -853,7 +875,7 @@ export const REVIEW_LOG: RepoReview[] = [
 
 export type EpisodeMeta = {
   ep: number
-  host: RepoReview["host"]
+  host: Host
   epTitle: string
   /** ISO date the episode aired. */
   date: string
@@ -951,7 +973,7 @@ export function mondayOf(iso: string) {
 
 export const WEEK_SLOTS = 4
 
-export type ProviderTally = Record<RepoReview["host"], number>
+export type ProviderTally = Record<Host, number>
 
 export type WeekSlot = {
   /** 1 = freshest ingest, 4 = about to roll into the vault. */
