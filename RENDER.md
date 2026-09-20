@@ -16,7 +16,7 @@ The machine-readable dataset is static too. `pnpm api` writes `/api/v1/*.json`,
 Next runs, so they are copied into the export like any other asset — the JSON
 endpoints work on the free static plan exactly as they do on Vercel.
 
-`STATIC_EXPORT=true pnpm build` writes those files to `out/`.
+`pnpm build:static` writes those files to `out/`.
 
 ## Option A — Blueprint (recommended)
 
@@ -32,7 +32,7 @@ Render Dashboard → **New** → **Static Site**, then:
 
 | Field | Value |
 | --- | --- |
-| Build command | `corepack enable && pnpm install --frozen-lockfile && STATIC_EXPORT=true pnpm build` |
+| Build command | `corepack enable && pnpm install --frozen-lockfile && pnpm build:static` |
 | Publish directory | `out` |
 
 The security headers in `render.yaml` (`X-Content-Type-Options`,
@@ -71,7 +71,7 @@ Vercel scripts.
 ## Local check
 
 ```bash
-STATIC_EXPORT=true pnpm build
+pnpm build:static
 cd out && python3 -m http.server 4173
 ```
 

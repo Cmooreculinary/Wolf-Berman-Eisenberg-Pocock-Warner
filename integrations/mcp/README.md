@@ -52,7 +52,7 @@ another deployment, or to a local build:
 EPWWB_BASE_URL=https://your-site.example node server.mjs
 
 # a local static export, no network at all
-STATIC_EXPORT=true pnpm build
+pnpm build:static
 EPWWB_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs
 ```
 

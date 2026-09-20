@@ -12,7 +12,7 @@ services:
     runtime: static
     name: eisenberg-pocock-warner-wolfe-berman
     # Corepack ships the pnpm version pinned in package.json.
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && STATIC_EXPORT=true pnpm build
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build:static
     staticPublishPath: ./out
     # next.config.mjs applies these itself when Next is serving; a static
     # export has no server, so Render sends them.

@@ -1,8 +1,9 @@
-import { EPISODES, mondayOf, shiftDays, type RepoPillar } from "./repos"
+import { EPISODES, HOSTS, mondayOf, shiftDays, type Host, type RepoPillar } from "./repos"
 
 export type SkillTier = "foundational" | "working" | "advanced"
 
-export type SkillHost = "Eisenberg" | "Pocock" | "Warner" | "Wolfe" | "Berman"
+/** Lessons are taught by the same five feeds the review log tracks. */
+export type SkillHost = Host
 
 /**
  * One time a skill was actually taught on air. The air date is deliberately not
@@ -428,7 +429,7 @@ export function buildCurriculum(skills: Skill[] = SKILLS): Curriculum {
   const covered: CoveredSkill[] = []
   const dormant: Skill[] = []
   let lessonCount = 0
-  const hostTally: Record<SkillHost, number> = { Eisenberg: 0, Pocock: 0, Warner: 0, Wolfe: 0, Berman: 0 }
+  const hostTally = Object.fromEntries(HOSTS.map((h) => [h, 0])) as Record<SkillHost, number>
 
   for (const s of skills) {
     const lessons = lessonsBySkill.get(s.id)!

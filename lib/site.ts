@@ -3,7 +3,7 @@
  *
  * The site is a static export, so there is no request-time server to answer an
  * agent's questions. Instead the whole dataset is written to plain JSON files
- * at build time (see `scripts/build-api.mjs`) and served from the CDN like any
+ * at build time (see `scripts/build-api.ts`) and served from the CDN like any
  * other asset. This module is the single registry of what exists and where —
  * the generator, the OpenAPI document, the in-app Integrate view and the MCP
  * server all read it, so a path can never be right in one place and stale in
@@ -30,7 +30,7 @@ export const SITE_DESCRIPTION =
 
 export const PUBLISHER = { name: "Blue Collar Appz Co.", url: "https://bcappz.com" }
 
-export const REPO_URL = "https://github.com/Cmooreculinary/wolf-berman-eisenberg-pocock-warner"
+export const REPO_URL = "https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner"
 
 /** Absolute URL for a site-relative path. */
 export function absolute(path: string) {
@@ -143,9 +143,13 @@ export const DISCOVERY = {
   agent: "/.well-known/agent.json",
 } as const
 
+/**
+ * The repository ships MIT, so the dataset does too — publishing a different
+ * licence here would put the manifest at odds with the LICENSE file, and a
+ * consumer who reads only one of the two would be misled about their rights.
+ */
 export const LICENSE = {
-  /** The dataset is editorial: facts about public episodes, compiled here. */
-  name: "CC BY 4.0",
-  url: "https://creativecommons.org/licenses/by/4.0/",
+  name: "MIT",
+  url: `${REPO_URL}/blob/main/LICENSE`,
   attribution: `${SITE_NAME} — ${PUBLISHER.name}`,
 } as const

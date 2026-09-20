@@ -164,7 +164,7 @@ moved.
 
 ## 9. Terms
 
-Licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribute as
+Licensed [MIT](LICENSE), the same licence as the code. Attribute as
 *"Eisenberg, Pocock, Warner, Wolfe & Berman — Blue Collar Appz Co."*
 
 The dataset is editorial: it records what five public feeds covered, with air
@@ -180,6 +180,8 @@ wherever you republish them.
 pnpm install --frozen-lockfile
 pnpm api          # regenerate the JSON, OpenAPI, llms.txt and manifest
 pnpm dev          # runs pnpm api first, then next dev
+pnpm build:static # the export CI and the deploys ship
+pnpm check        # typecheck + data integrity
 pnpm check:export # assert a finished build published all of it
 ```
 
@@ -188,7 +190,7 @@ The generated files under `public/api/`, `public/.well-known/`,
 committed — `pnpm api` rewrites them from `lib/`.
 
 To add an endpoint: register it in `ENDPOINTS` (`lib/site.ts`), add a builder in
-`lib/api.ts`, and map the two together in `scripts/build-api.mjs`. The generator
+`lib/api.ts`, and map the two together in `scripts/build-api.ts`. The generator
 fails the build if a registered endpoint has no builder, or a builder has no
 registered endpoint, so the OpenAPI document, `llms.txt`, the manifest, the
 sitemap and the Integrate view cannot fall behind.

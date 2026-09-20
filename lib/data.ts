@@ -1,3 +1,5 @@
+import { HOSTS, providerChannelUrl, providerDisplayName, type Host } from "./repos"
+
 export type InventoryKind = "agent" | "skill" | "protocol"
 
 export type InventoryItem = {
@@ -47,36 +49,38 @@ export const PILLARS = [
   },
 ]
 
-export const SOURCE_FEEDS = [
-  {
-    name: "Eisenberg",
-    focus: "Founder strategy and conversion",
-    url: "https://www.youtube.com/results?search_query=Eisenberg+AI+founder",
-  },
-  {
-    name: "Pocock",
-    focus: "AI implementation and open-source tooling",
-    url: "https://www.youtube.com/results?search_query=Pocock+AI",
-  },
-  {
-    name: "Warner",
-    focus: "Agent systems, media, and distribution",
-    url: "https://www.youtube.com/results?search_query=Warner+AI+agents",
-  },
-  {
-    name: "Matt Wolfe",
-    focus: "Weekly AI news, practical tools, commentary, and demos",
-    url: "https://www.youtube.com/@mreflow",
-  },
-  {
-    name: "Matthew Berman",
-    focus: "AI and emerging-technology explainers, open-source experiments, and practical workflows",
-    url: "https://www.youtube.com/@matthew_berman",
-  },
-] as const
+/** What each feed is watched for. */
+const FEED_FOCUS: Record<Host, string> = {
+  Eisenberg: "Founder strategy and conversion",
+  Pocock: "AI implementation and open-source tooling",
+  Warner: "Agent systems, media, and distribution",
+  Wolfe: "Weekly AI news, practical tools, commentary, and demos",
+  Berman: "AI and emerging-technology explainers, open-source experiments, and practical workflows",
+}
+
+/**
+ * The five feeds, in board order. Names and channel URLs are not written down
+ * a second time here — they resolve through `lib/repos.ts`, which is the only
+ * place a provider identity lives. A feed can therefore never be linked one
+ * way on this screen and another way on the repo board.
+ */
+export const SOURCE_FEEDS = HOSTS.map((host) => ({
+  host,
+  name: providerDisplayName(host),
+  focus: FEED_FOCUS[host],
+  url: providerChannelUrl(host),
+}))
 
 export const SOURCE_NOTE =
-  "Eisenberg, Pocock, Warner, Matt Wolfe and Matthew Berman are the five rooms in this rolling intelligence shop. The standard is direct, practical founder information: agents, compliance, tools, implementation and distribution. Wolfe adds a weekly signal on AI news and usable tools; Berman adds accessible technical walkthroughs and open-source experiments. Nothing here is padded."
+  "Greg Isenberg, Matt Pocock, Andrew Warner, Matt Wolfe and Matthew Berman are the five rooms in this rolling intelligence shop. The standard is direct, practical founder information: agents, compliance, tools, implementation and distribution. Wolfe adds a weekly signal on AI news and usable tools; Berman adds accessible technical walkthroughs and open-source experiments. Nothing here is padded."
+
+/**
+ * Shown wherever the five feeds are named. These are real people who have not
+ * endorsed this project, and the board should never be able to read as though
+ * they had.
+ */
+export const DISCLAIMER =
+  "An independent, unaffiliated index of publicly available videos. Not endorsed by, sponsored by, or affiliated with any of the creators listed."
 
 export const INVENTORY: InventoryItem[] = [
   {
