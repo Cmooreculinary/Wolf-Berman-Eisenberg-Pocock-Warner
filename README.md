@@ -1,4 +1,4 @@
-# Eisenberg, Pocock, Warner, Wolfe & Berman
+Wolfe & Berman
 
 A rolling four-week intelligence workspace over five public founder feeds.
 Repos reviewed with crossovers cut, the skills each review taught, an ACP
