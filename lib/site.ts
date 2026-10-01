@@ -10,6 +10,8 @@
  * another.
  */
 
+import { HOSTS, providerDisplayName, type Host } from "./repos"
+
 export const API_VERSION = "v1"
 export const API_BASE = `/api/${API_VERSION}`
 
@@ -27,7 +29,27 @@ export const SITE_URL = (
 
 export const SITE_NAME = "Wolff Berman"
 
-export const SITE_TAGLINE = "Rolling four-week intelligence on agents, governance and distribution."
+/**
+ * The product name carries two of the five tracked feeds; the tagline carries
+ * the other three, so the two together name every feed in the window.
+ *
+ * Derived from HOSTS rather than written out, so adding a sixth feed or
+ * reordering the five cannot leave a stale name in the manifest. Surnames come
+ * from the display names, which is why this reads "Isenberg" and not the
+ * "Eisenberg" pillar key -- the feed belongs to Greg Isenberg.
+ */
+export const TITLE_HOSTS: readonly Host[] = ["Wolfe", "Berman"]
+
+const TAGLINE_SURNAMES = HOSTS.filter((h) => !TITLE_HOSTS.includes(h)).map(
+  (h) => providerDisplayName(h).split(" ").at(-1) as string,
+)
+
+/** "Isenberg · Pocock · Warner" -- the visible tagline under the name. */
+export const FEEDS_LINE = TAGLINE_SURNAMES.join(" \u00b7 ")
+
+export const SITE_TAGLINE = `${TAGLINE_SURNAMES.slice(0, -1).join(", ")} & ${
+  TAGLINE_SURNAMES.at(-1)
+} — rolling four-week intelligence on agents, governance and distribution.`
 
 export const SITE_DESCRIPTION =
   "A rolling four-week window over five founder feeds: repositories reviewed on air with crossovers cut, " +

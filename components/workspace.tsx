@@ -16,7 +16,7 @@ import {
   Wrench,
 } from "lucide-react"
 import { DISCLAIMER } from "@/lib/data"
-import { REPO_URL, SITE_NAME } from "@/lib/site"
+import { FEEDS_LINE, REPO_URL, SITE_NAME } from "@/lib/site"
 import { ConvergenceView } from "@/components/views/convergence"
 import { BlueprintView } from "@/components/views/blueprint"
 import { InventoryView } from "@/components/views/inventory"
@@ -186,7 +186,7 @@ export function Workspace() {
                 Wolff <span className="text-accent">Berman</span>
               </div>
               <div className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted-foreground">
-                Rolling 4-week intelligence
+                {FEEDS_LINE}
               </div>
             </div>
 
