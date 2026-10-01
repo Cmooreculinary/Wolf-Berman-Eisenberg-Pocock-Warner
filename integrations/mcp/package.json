@@ -1,10 +1,10 @@
 {
-  "name": "epwwb-mcp",
+  "name": "wolff-berman-mcp",
   "version": "1.0.0",
   "private": true,
-  "description": "MCP server for the Eisenberg, Pocock, Warner, Wolfe & Berman dataset. No dependencies.",
+  "description": "MCP server for the Wolff Berman dataset. No dependencies.",
   "type": "module",
-  "bin": { "epwwb-mcp": "./server.mjs" },
+  "bin": { "wolff-berman-mcp": "./server.mjs" },
   "main": "./server.mjs",
   "engines": { "node": ">=18" },
   "files": ["server.mjs", "README.md"]
