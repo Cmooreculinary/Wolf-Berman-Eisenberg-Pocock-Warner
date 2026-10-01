@@ -11,7 +11,7 @@ therefore limited to the dependency tree and the content of the build output.
 
 Open a [private security advisory][advisory] rather than a public issue.
 
-[advisory]: https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner/security/advisories/new
+[advisory]: https://github.com/Cmooreculinary/Wolff-Berman/security/advisories/new
 
 Please include what you did, what happened, and what you expected. A first
 response should come within a week.

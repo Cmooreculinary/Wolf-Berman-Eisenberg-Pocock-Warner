@@ -165,7 +165,7 @@ export function buildAgentManifest(generatedAt: string) {
       source: `${REPO_URL}/blob/main/integrations/mcp/server.mjs`,
       command: "node",
       args: ["integrations/mcp/server.mjs"],
-      env: { EPWWB_BASE_URL: SITE_URL },
+      env: { WOLFF_BERMAN_BASE_URL: SITE_URL },
     },
   }
 }

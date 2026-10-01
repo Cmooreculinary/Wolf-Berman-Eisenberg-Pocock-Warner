@@ -41,9 +41,7 @@ export function ConvergenceView() {
 
         {/* the name is the hook — it carries the page */}
         <h1 className="mt-4 text-[40px] font-semibold leading-[1.02] tracking-[-0.045em] text-balance sm:text-[56px]">
-          Eisenberg, Pocock, Warner,
-          <br />
-          Wolfe <span className="text-accent">&amp;</span> Berman
+          Wolff <span className="text-accent">Berman</span>
         </h1>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground text-pretty">{SOURCE_NOTE}</p>
@@ -94,11 +92,9 @@ export function ConvergenceView() {
               Convergence
             </span>
             <span className="mt-1 text-center text-[11px] font-semibold leading-[1.25] tracking-[-0.03em]">
-              Eisenberg, Pocock,
+              Wolff
               <br />
-              Warner, Wolfe
-              <br />
-              &amp; Berman
+              Berman
             </span>
             <span className="mt-2 h-px w-8 bg-accent" />
           </div>

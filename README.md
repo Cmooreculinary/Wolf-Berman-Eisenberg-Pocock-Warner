@@ -1,4 +1,4 @@
-# Eisenberg, Pocock, Warner, Wolfe & Berman
+# Wolff Berman
 
 A rolling four-week intelligence workspace over five public founder feeds.
 Repos reviewed with crossovers cut, the skills each review taught, an ACP
@@ -43,7 +43,7 @@ No key, no quota, CORS open to every origin. The repo also ships a
 zero-dependency MCP server, so an agent can read the whole dataset as tools:
 
 ```bash
-claude mcp add epwwb -- node /absolute/path/to/integrations/mcp/server.mjs
+claude mcp add wolff-berman -- node /absolute/path/to/integrations/mcp/server.mjs
 ```
 
 Discovery sits at `/llms.txt`, `/openapi.json` and `/.well-known/agent.json`.

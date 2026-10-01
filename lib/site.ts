@@ -13,12 +13,19 @@
 export const API_VERSION = "v1"
 export const API_BASE = `/api/${API_VERSION}`
 
-/** Where this build is deployed. Override per environment. */
+/**
+ * Where this build is deployed. Override per environment.
+ *
+ * Still the five-surname hostname after the rename to Wolff Berman: this is
+ * an address, not a label, and every absolute URL in the manifest, OpenAPI
+ * document, sitemap and JSON-LD is built from it. It moves when the Render
+ * service in render.yaml moves, not before.
+ */
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://eisenberg-pocock-warner-wolfe-berman.onrender.com"
 ).replace(/\/+$/, "")
 
-export const SITE_NAME = "Eisenberg, Pocock, Warner, Wolfe & Berman"
+export const SITE_NAME = "Wolff Berman"
 
 export const SITE_TAGLINE = "Rolling four-week intelligence on agents, governance and distribution."
 
@@ -30,7 +37,7 @@ export const SITE_DESCRIPTION =
 
 export const PUBLISHER = { name: "Blue Collar Appz Co.", url: "https://bcappz.com" }
 
-export const REPO_URL = "https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner"
+export const REPO_URL = "https://github.com/Cmooreculinary/Wolff-Berman"
 
 /** Absolute URL for a site-relative path. */
 export function absolute(path: string) {

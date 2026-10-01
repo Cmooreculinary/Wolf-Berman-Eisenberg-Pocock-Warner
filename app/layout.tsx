@@ -16,9 +16,9 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Eisenberg, Pocock, Warner, Wolfe & Berman — Rolling 4-Week Intelligence',
+  title: 'Wolff Berman — Rolling 4-Week Intelligence',
   description:
-    'Eisenberg, Pocock, Warner, Wolfe & Berman: a rolling four-week window on five founder feeds worth the week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Every view is also a public JSON endpoint. Built by Blue Collar Appz Co.',
+    'Wolff Berman: a rolling four-week window on five founder feeds worth the week. Repos reviewed with crossovers cut, skills covered, the ACP funnel simulator, technical core inventory, founder toolbox, and a 13-slide exportable deck. Every view is also a public JSON endpoint. Built by Blue Collar Appz Co.',
   generator: 'v0.app',
   // The page renders client-side; point anything that reads markup at the data.
   alternates: {

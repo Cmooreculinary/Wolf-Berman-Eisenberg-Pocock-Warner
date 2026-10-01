@@ -1,5 +1,5 @@
 {
-  "name": "eisenberg-pocock-warner-wolfe-berman",
+  "name": "wolff-berman",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -50,6 +50,6 @@
   "description": "A rolling four-week intelligence workspace over five public founder feeds.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner.git"
+    "url": "git+https://github.com/Cmooreculinary/Wolff-Berman.git"
   }
 }

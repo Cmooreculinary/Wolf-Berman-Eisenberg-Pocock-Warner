@@ -52,7 +52,7 @@ jobs:
             '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' \
             '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
             '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_overview","arguments":{}}}' \
-          | EPWWB_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
+          | WOLFF_BERMAN_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
           | tee /dev/stderr \
           | grep -q 'Rolling four-week intelligence'
 

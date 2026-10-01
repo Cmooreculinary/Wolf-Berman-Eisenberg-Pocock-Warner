@@ -73,7 +73,7 @@ dependencies, ten tools. Anything that speaks MCP over stdio can use it.
 ```jsonc
 {
   "mcpServers": {
-    "epwwb": {
+    "wolff-berman": {
       "command": "node",
       "args": ["/absolute/path/to/integrations/mcp/server.mjs"]
     }
@@ -83,7 +83,7 @@ dependencies, ten tools. Anything that speaks MCP over stdio can use it.
 
 ```bash
 # Claude Code
-claude mcp add epwwb -- node /absolute/path/to/integrations/mcp/server.mjs
+claude mcp add wolff-berman -- node /absolute/path/to/integrations/mcp/server.mjs
 ```
 
 Tools: `get_overview`, `list_repos`, `get_window`, `list_skills`,
@@ -91,7 +91,7 @@ Tools: `get_overview`, `list_repos`, `get_window`, `list_skills`,
 `search`. Full detail in [`integrations/mcp/README.md`](integrations/mcp/README.md).
 
 Point it at your own deployment — or at a local `out/` directory, with no
-network at all — using `EPWWB_BASE_URL`.
+network at all — using `WOLFF_BERMAN_BASE_URL`.
 
 ---
 
@@ -148,7 +148,7 @@ moved.
 ## 8. Terms
 
 Licensed [MIT](LICENSE), the same licence as the code. Attribute as
-*"Eisenberg, Pocock, Warner, Wolfe & Berman — Blue Collar Appz Co."*
+*"Wolff Berman — Blue Collar Appz Co."*
 
 The dataset is editorial: it records what five public feeds covered, with air
 dates resolved from a single review log. Figures in the funnel model and the
