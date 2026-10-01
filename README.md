@@ -30,6 +30,25 @@ rather than invisible.
 | Vault | Weeks that have rolled out of the live window |
 | Deck | A 13-slide summary, exportable to `.pptx` |
 
+## For agents and integrators
+
+Every view is also a public JSON endpoint, generated at build time from the same
+modules the pages import:
+
+```bash
+curl -s https://eisenberg-pocock-warner-wolfe-berman.onrender.com/api/v1/index.json
+```
+
+No key, no quota, CORS open to every origin. The repo also ships a
+zero-dependency MCP server, so an agent can read the whole dataset as tools:
+
+```bash
+claude mcp add epwwb -- node /absolute/path/to/integrations/mcp/server.mjs
+```
+
+Discovery sits at `/llms.txt`, `/openapi.json` and `/.well-known/agent.json`.
+Full guide: **[INTEGRATE.md](INTEGRATE.md)**.
+
 ## Data model
 
 `lib/repos.ts` holds `REVIEW_LOG` — one row per airing — and is the single
@@ -71,20 +90,28 @@ pnpm dev
 
 Open <http://localhost:3000>.
 
+`dev` and both build scripts run `pnpm api` first, which writes the
+machine-readable half of the site — `public/api/v1/*.json`, `public/openapi.json`,
+`public/llms.txt` and `public/.well-known/agent.json` — from `lib/`. Those files
+are build output and are not committed.
+
 ## Checks
 
 ```bash
 pnpm check        # typecheck + data integrity — what CI runs
 pnpm typecheck    # tsc --noEmit
 pnpm check:data   # review log / curriculum consistency
+pnpm check:export # every JSON endpoint present and parseable in out/
 pnpm build        # production build
+pnpm build:static # the static export CI and Render ship
 ```
 
 ## Deploying
 
-Every route is prerendered, so this deploys as a **static site** — no server,
-no database, no API route. `STATIC_EXPORT=true pnpm build` writes ~1.7 MB to
-`out/`.
+Every route is prerendered, so this deploys as a **static site** — no server and
+no database. The JSON endpoints need neither: they are files written into
+`public/` before the build, not routes answered at request time.
+`pnpm build:static` writes the whole thing to `out/`.
 
 - **Render** — `render.yaml` is a Blueprint; Render Dashboard → New → Blueprint
   → pick this repo. Full detail, including the manual path, in [RENDER.md](RENDER.md).
@@ -100,4 +127,8 @@ wrong, say which row.
 
 ## License
 
-[MIT](LICENSE) © Blue Collar Appz Co.
+[MIT](LICENSE) © Blue Collar Appz Co. — code and published dataset alike.
+
+The dataset is editorial: it records what five public feeds covered. Figures in
+the funnel model and the niche board are models, not forecasts, and should be
+labelled that way wherever they are republished.

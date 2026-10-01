@@ -1,9 +1,27 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { TrendingUp, AlertTriangle, GitCompare } from "lucide-react"
+import { TrendingUp, AlertTriangle, ArrowUpRight, GitCompare } from "lucide-react"
 import { Panel, PanelHeader, Slider, Stat, Chip, CopyButton, currency, compact } from "@/components/kit"
+import {
+  EXIT_MULTIPLE,
+  FUNNEL_DEFAULTS,
+  FUNNEL_FIELDS,
+  MRR_TARGET,
+  roundOutputs,
+  simulateFunnel,
+  type FunnelField,
+  type FunnelInputs,
+} from "@/lib/funnel"
+import { API_BASE } from "@/lib/site"
 import { cn } from "@/lib/utils"
+
+/** How each published unit reads on a slider. */
+const FORMAT: Record<FunnelField["unit"], (v: number) => string> = {
+  count: compact,
+  percent: (v) => `${v}%`,
+  usd: currency,
+}
 
 function Bar({ label, value, max, tone }: { label: string; value: number; max: number; tone: "accent" | "slate" }) {
   const pct = Math.max(2, Math.min(100, (value / max) * 100))
@@ -24,49 +42,47 @@ function Bar({ label, value, max, tone }: { label: string; value: number; max: n
 }
 
 export function BlueprintView() {
-  const [audience, setAudience] = useState(10_000)
-  const [toCommunity, setToCommunity] = useState(6)
-  const [toProduct, setToProduct] = useState(4)
-  const [price, setPrice] = useState(79)
-  const [affiliate, setAffiliate] = useState(45)
+  const [audience, setAudience] = useState(FUNNEL_DEFAULTS.audience)
+  const [toCommunity, setToCommunity] = useState(FUNNEL_DEFAULTS.communityConversionPct)
+  const [toProduct, setToProduct] = useState(FUNNEL_DEFAULTS.productConversionPct)
+  const [price, setPrice] = useState(FUNNEL_DEFAULTS.pricePerMonth)
+  const [affiliate, setAffiliate] = useState(FUNNEL_DEFAULTS.affiliateSharePct)
 
-  const m = useMemo(() => {
-    const community = audience * (toCommunity / 100)
-    const customers = community * (toProduct / 100)
-    const gross = customers * price
-    const affiliatePayout = gross * (affiliate / 100)
-    const net = gross - affiliatePayout
-    const arr = gross * 12
-    const exit = arr * 5
-    return { community, customers, gross, affiliatePayout, net, arr, exit }
-  }, [audience, toCommunity, toProduct, price, affiliate])
-
-  const target = 50_000
-  const pctOfTarget = Math.min(100, (m.gross / target) * 100)
-
-  const payload = JSON.stringify(
-    {
-      inputs: { audience, communityConversionPct: toCommunity, productConversionPct: toProduct, pricePerMonth: price, affiliateSharePct: affiliate },
-      outputs: {
-        community: Math.round(m.community),
-        customers: Math.round(m.customers),
-        grossMRR: Math.round(m.gross),
-        affiliatePayout: Math.round(m.affiliatePayout),
-        netMRR: Math.round(m.net),
-        arr: Math.round(m.arr),
-        exitAt5x: Math.round(m.exit),
-      },
-    },
-    null,
-    2,
+  // The arithmetic lives in lib/funnel.ts because it is also published at
+  // /api/v1/funnel.json and exposed as an MCP tool. Three copies of a formula
+  // is three chances to disagree about the same number.
+  const { inputs, outputs: m } = useMemo(
+    () =>
+      simulateFunnel({
+        audience,
+        communityConversionPct: toCommunity,
+        productConversionPct: toProduct,
+        pricePerMonth: price,
+        affiliateSharePct: affiliate,
+      }),
+    [audience, toCommunity, toProduct, price, affiliate],
   )
+
+  const pctOfTarget = m.pctOfTarget
+
+  // Bounds and labels come from the same field spec the API publishes, so a
+  // slider cannot offer a value the documented model would clamp away.
+  const setters: Record<keyof FunnelInputs, (v: number) => void> = {
+    audience: setAudience,
+    communityConversionPct: setToCommunity,
+    productConversionPct: setToProduct,
+    pricePerMonth: setPrice,
+    affiliateSharePct: setAffiliate,
+  }
+
+  const payload = JSON.stringify({ inputs, outputs: roundOutputs(m) }, null, 2)
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
       <header className="max-w-2xl">
         <Chip tone="accent">2026 AI Venture Blueprint</Chip>
         <h1 className="mt-3 text-[30px] font-semibold leading-[1.15] tracking-[-0.02em] text-balance">
-          The ACP growth engine, priced to clear $50k a month.
+          The ACP growth engine, priced to clear ${compact(MRR_TARGET)} a month.
         </h1>
       </header>
 
@@ -78,26 +94,47 @@ export function BlueprintView() {
             right={<CopyButton payload={payload} label="JSON" />}
           />
           <div className="mt-5 space-y-5">
-            <Slider label="Audience (owned reach)" value={audience} min={1000} max={200_000} step={1000} onChange={setAudience} format={compact} />
-            <Slider label="Audience → Community" value={toCommunity} min={1} max={25} onChange={setToCommunity} format={(v) => `${v}%`} />
-            <Slider label="Community → Product" value={toProduct} min={1} max={30} onChange={setToProduct} format={(v) => `${v}%`} />
-            <Slider label="Price per month" value={price} min={9} max={499} onChange={setPrice} format={currency} />
-            <Slider label="Affiliate rev-share" value={affiliate} min={0} max={60} onChange={setAffiliate} format={(v) => `${v}%`} />
+            {FUNNEL_FIELDS.map((f) => (
+              <Slider
+                key={f.key}
+                label={f.label}
+                value={inputs[f.key]}
+                min={f.min}
+                max={f.max}
+                step={f.step}
+                onChange={setters[f.key]}
+                format={FORMAT[f.unit]}
+              />
+            ))}
           </div>
         </Panel>
 
         <div className="space-y-5">
           <Panel>
-            <PanelHeader title="Projected economics" hint={`${pctOfTarget.toFixed(0)}% of the $50k/mo target.`} />
+            <PanelHeader
+              title="Projected economics"
+              hint={`${pctOfTarget.toFixed(0)}% of the ${currency(MRR_TARGET)}/mo target.`}
+              right={
+                <a
+                  href={`${API_BASE}/funnel.json`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-border bg-card px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <ArrowUpRight className="size-3.5" />
+                  model JSON
+                </a>
+              }
+            />
             <div className="mt-4 h-2 overflow-hidden rounded-full bg-secondary">
               <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${pctOfTarget}%` }} />
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              <Stat label="Gross MRR" value={currency(m.gross)} emphasis sub={`${Math.round(m.customers).toLocaleString()} customers`} />
+              <Stat label="Gross MRR" value={currency(m.grossMRR)} emphasis sub={`${Math.round(m.customers).toLocaleString()} customers`} />
               <Stat label="Affiliate payout" value={currency(m.affiliatePayout)} sub={`${affiliate}% rev-share`} />
-              <Stat label="Net MRR" value={currency(m.net)} sub="after creator loops" />
+              <Stat label="Net MRR" value={currency(m.netMRR)} sub="after creator loops" />
               <Stat label="ARR" value={currency(m.arr)} />
-              <Stat label="Exit at 5x ARR" value={currency(m.exit)} sub="100% equity retained" />
+              <Stat label={`Exit at ${EXIT_MULTIPLE}x ARR`} value={currency(m.exitAt5x)} sub="100% equity retained" />
               <Stat label="Headcount" value="0" sub="automated operations" />
             </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-3">

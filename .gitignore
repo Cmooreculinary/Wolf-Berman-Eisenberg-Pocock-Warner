@@ -20,3 +20,9 @@ next-env.d.ts
 
 # Static export output
 out/
+
+# Machine-readable API, regenerated from lib/ on every build (pnpm api)
+public/api/
+public/.well-known/
+public/openapi.json
+public/llms.txt

@@ -7,12 +7,14 @@
   },
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:static": "STATIC_EXPORT=true next build",
+    "api": "tsx scripts/build-api.ts",
+    "dev": "pnpm api && next dev",
+    "build": "pnpm api && next build",
+    "build:static": "pnpm api && STATIC_EXPORT=true next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "check:data": "tsx scripts/check-data.ts",
+    "check:export": "tsx scripts/check-export.ts",
     "check": "pnpm typecheck && pnpm check:data"
   },
   "dependencies": {
