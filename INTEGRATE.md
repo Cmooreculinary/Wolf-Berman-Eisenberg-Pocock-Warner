@@ -136,24 +136,7 @@ the published bounds rather than rejected.
 
 ---
 
-## 7. Embedding
-
-The site is a static export with no framing restrictions, so a view can be
-embedded directly:
-
-```html
-<iframe
-  src="https://eisenberg-pocock-warner-wolfe-berman.onrender.com/#repos"
-  width="100%" height="720" style="border:0;border-radius:12px"
-  title="Repos reviewed — rolling 4-week window"></iframe>
-```
-
-For anything more than a panel, render the JSON yourself — it is the same data
-and it will fit your layout better than ours.
-
----
-
-## 8. Caching and etiquette
+## 7. Caching and etiquette
 
 `Cache-Control: public, max-age=300, stale-while-revalidate=86400`. The data
 changes only when a build runs, which is weekly at most — polling faster than
@@ -162,7 +145,7 @@ moved.
 
 ---
 
-## 9. Terms
+## 8. Terms
 
 Licensed [MIT](LICENSE), the same licence as the code. Attribute as
 *"Eisenberg, Pocock, Warner, Wolfe & Berman — Blue Collar Appz Co."*
@@ -174,7 +157,7 @@ wherever you republish them.
 
 ---
 
-## 10. Working on it
+## 9. Working on it
 
 ```bash
 pnpm install --frozen-lockfile

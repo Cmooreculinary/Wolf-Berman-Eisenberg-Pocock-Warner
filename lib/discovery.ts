@@ -88,7 +88,7 @@ export function buildLlmsTxt() {
     "",
     `- [OpenAPI 3.1](${absolute(DISCOVERY.openapi)}): typed contract for every endpoint above.`,
     `- [Agent manifest](${absolute(DISCOVERY.agent)}): what this app is and every way to plug into it.`,
-    `- [Integration guide](${REPO_URL}/blob/main/INTEGRATE.md): MCP server, client snippets, embedding.`,
+    `- [Integration guide](${REPO_URL}/blob/main/INTEGRATE.md): MCP server, client snippets, deep links.`,
     "",
     "## Terms",
     "",

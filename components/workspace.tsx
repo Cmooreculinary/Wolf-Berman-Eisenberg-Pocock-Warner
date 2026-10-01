@@ -68,7 +68,7 @@ const NAV: {
   {
     group: "Connect",
     items: [
-      { id: "integrate", label: "Integrate", icon: Plug, caption: "JSON API, MCP, embeds" },
+      { id: "integrate", label: "Integrate", icon: Plug, caption: "JSON API, MCP server" },
     ],
   },
   {
