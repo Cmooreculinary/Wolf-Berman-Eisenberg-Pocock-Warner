@@ -54,7 +54,11 @@ jobs:
             '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_overview","arguments":{}}}' \
           | WOLFF_BERMAN_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
           | tee /dev/stderr \
-          | grep -q 'Rolling four-week intelligence'
+          | grep -q 'nextRoll'
+          # Asserts a structural key from the window payload, not a display
+          # string: the tool's JSON is escaped inside content[].text, and
+          # pinning this to the tagline broke the build the first time the
+          # tagline was reworded.
 
       - name: Report export size
         run: du -sh out
