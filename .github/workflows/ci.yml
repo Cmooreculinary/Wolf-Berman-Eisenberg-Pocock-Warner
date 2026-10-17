@@ -52,9 +52,13 @@ jobs:
             '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}' \
             '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
             '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_overview","arguments":{}}}' \
-          | EPWWB_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
+          | WOLFF_BERMAN_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs \
           | tee /dev/stderr \
-          | grep -q 'Rolling four-week intelligence'
+          | grep -q 'nextRoll'
+          # Asserts a structural key from the window payload, not a display
+          # string: the tool's JSON is escaped inside content[].text, and
+          # pinning this to the tagline broke the build the first time the
+          # tagline was reworded.
 
       - name: Report export size
         run: du -sh out

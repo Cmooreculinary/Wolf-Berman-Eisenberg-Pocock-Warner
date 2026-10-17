@@ -16,6 +16,7 @@ import {
   Wrench,
 } from "lucide-react"
 import { DISCLAIMER } from "@/lib/data"
+import { FEEDS_LINE, REPO_URL, SITE_NAME } from "@/lib/site"
 import { ConvergenceView } from "@/components/views/convergence"
 import { BlueprintView } from "@/components/views/blueprint"
 import { InventoryView } from "@/components/views/inventory"
@@ -68,7 +69,7 @@ const NAV: {
   {
     group: "Connect",
     items: [
-      { id: "integrate", label: "Integrate", icon: Plug, caption: "JSON API, MCP, embeds" },
+      { id: "integrate", label: "Integrate", icon: Plug, caption: "JSON API, MCP server" },
     ],
   },
   {
@@ -149,7 +150,7 @@ export function Workspace() {
       <div className="sticky top-0 z-30 flex h-7 items-center gap-4 border-b border-border/70 mac-glass px-4 text-[12px] text-muted-foreground">
         <span aria-hidden className="h-3 w-4 shrink-0 bca-hatch" />
         <span className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-foreground">
-          Eisenberg, Pocock, Warner, Wolfe &amp; Berman
+          {SITE_NAME}
         </span>
         <span className="hidden text-border-strong sm:inline">/</span>
         <a
@@ -181,14 +182,11 @@ export function Workspace() {
 
             {/* masthead — the name is the hook */}
             <div className="border-y border-sidebar-border px-4 py-3.5">
-              <div className="flex items-baseline gap-1.5 text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-                <span>Eisenberg, Pocock,</span>
-              </div>
               <div className="text-[15px] font-semibold leading-[1.15] tracking-[-0.03em] text-foreground">
-                Warner, Wolfe <span className="text-accent">&amp;</span> Berman
+                Wolff <span className="text-accent">Berman</span>
               </div>
               <div className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted-foreground">
-                Rolling 4-week intelligence
+                {FEEDS_LINE}
               </div>
             </div>
 
@@ -251,7 +249,7 @@ export function Workspace() {
               <div className="min-w-0">
                 <div className="truncate text-[13px] font-semibold tracking-tight">{TITLES[view]}</div>
                 <div className="truncate text-[11px] text-muted-foreground">
-                  Eisenberg, Pocock, Warner, Wolfe &amp; Berman — built by Blue Collar Appz Co.
+                  {SITE_NAME} — built by Blue Collar Appz Co.
                 </div>
               </div>
               <div className="ml-auto hidden items-center gap-1 md:flex">
@@ -304,7 +302,7 @@ export function Workspace() {
               <p className="text-[11px] leading-relaxed text-muted-foreground">
                 {DISCLAIMER}{" "}
                 <a
-                  href="https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner"
+                  href={REPO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-2 hover:text-foreground"

@@ -88,7 +88,7 @@ export function buildLlmsTxt() {
     "",
     `- [OpenAPI 3.1](${absolute(DISCOVERY.openapi)}): typed contract for every endpoint above.`,
     `- [Agent manifest](${absolute(DISCOVERY.agent)}): what this app is and every way to plug into it.`,
-    `- [Integration guide](${REPO_URL}/blob/main/INTEGRATE.md): MCP server, client snippets, embedding.`,
+    `- [Integration guide](${REPO_URL}/blob/main/INTEGRATE.md): MCP server, client snippets, deep links.`,
     "",
     "## Terms",
     "",
@@ -165,7 +165,7 @@ export function buildAgentManifest(generatedAt: string) {
       source: `${REPO_URL}/blob/main/integrations/mcp/server.mjs`,
       command: "node",
       args: ["integrations/mcp/server.mjs"],
-      env: { EPWWB_BASE_URL: SITE_URL },
+      env: { WOLFF_BERMAN_BASE_URL: SITE_URL },
     },
   }
 }

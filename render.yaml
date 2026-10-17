@@ -1,4 +1,4 @@
-# Render Blueprint — Eisenberg, Pocock, Warner, Wolfe & Berman
+# Render Blueprint — Wolff Berman
 #
 # Deploys as a STATIC SITE, not a web service. Every route in this app is
 # prerendered, so there is no server to keep running: Render's static plan
@@ -10,6 +10,10 @@
 services:
   - type: web
     runtime: static
+    # The app is named Wolff Berman, but this stays: Render derives the
+    # hostname from it, and SITE_URL in lib/site.ts publishes that hostname
+    # in the manifest, OpenAPI document and sitemap. Renaming it here points
+    # a new service at a host nothing resolves to yet. Change both together.
     name: eisenberg-pocock-warner-wolfe-berman
     # Corepack ships the pnpm version pinned in package.json.
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build:static

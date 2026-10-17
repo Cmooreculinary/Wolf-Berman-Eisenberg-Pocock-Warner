@@ -31,7 +31,7 @@ hf auth login              # WRITE token from hf.co/settings/tokens
 ```
 
 3. **Create the Space** — huggingface.co/new-space → name
-   `wolf-berman-eisenberg-pocock-warner` → License **MIT** → SDK **Static** →
+   `wolff-berman` → License **MIT** → SDK **Static** →
    Public.
 
 4. **Write the Space card.** A Space README needs YAML frontmatter, and `out/`
@@ -40,7 +40,7 @@ hf auth login              # WRITE token from hf.co/settings/tokens
 
    ```markdown
    ---
-   title: Eisenberg, Pocock, Warner, Wolfe & Berman
+   title: Wolff Berman
    emoji: 📡
    colorFrom: gray
    colorTo: blue
@@ -54,7 +54,7 @@ hf auth login              # WRITE token from hf.co/settings/tokens
    with crossovers cut, the skills each review taught, an ACP funnel
    simulator, and a 13-slide exportable deck.
 
-   Source: https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner
+   Source: https://github.com/Cmooreculinary/Wolff-Berman
 
    An independent, unaffiliated index of publicly available videos. Not
    endorsed by, sponsored by, or affiliated with any of the creators listed.
@@ -63,12 +63,12 @@ hf auth login              # WRITE token from hf.co/settings/tokens
 5. **Upload:**
 
    ```bash
-   SPACE=<your-username>/wolf-berman-eisenberg-pocock-warner
+   SPACE=<your-username>/wolff-berman
    hf upload "$SPACE" out . --repo-type=space
    hf upload "$SPACE" space/README.md README.md --repo-type=space
    ```
 
-   Live at `https://<username>-wolf-berman-eisenberg-pocock-warner.hf.space`
+   Live at `https://<username>-wolff-berman.hf.space`
    within a minute. The Static SDK serves `index.html` at the root and handles
    the `_next/` asset paths as-is.
 
@@ -111,7 +111,7 @@ Also in there: an ACP funnel simulator, a technical-core inventory, and a
 13-slide deck that exports to .pptx in the browser.
 
 Demo: https://eisenberg-pocock-warner-wolfe-berman.onrender.com
-Code: https://github.com/Cmooreculinary/Wolf-Berman-Eisenberg-Pocock-Warner
+Code: https://github.com/Cmooreculinary/Wolff-Berman
 
 Stack: Next.js 16, React 19, Tailwind 4, shadcn, pptxgenjs. Fully static —
 every route prerenders, so it deploys to a free CDN tier with no server.

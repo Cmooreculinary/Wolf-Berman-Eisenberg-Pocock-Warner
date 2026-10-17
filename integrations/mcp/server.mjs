@@ -9,20 +9,20 @@
  *
  *   {
  *     "mcpServers": {
- *       "epwwb": { "command": "node", "args": ["/abs/path/integrations/mcp/server.mjs"] }
+ *       "wolff-berman": { "command": "node", "args": ["/abs/path/integrations/mcp/server.mjs"] }
  *     }
  *   }
  *
  * Point it at another deployment (or at a local `out/` directory) with
- * EPWWB_BASE_URL. See integrations/mcp/README.md.
+ * WOLFF_BERMAN_BASE_URL. See integrations/mcp/README.md.
  */
 import { readFile } from "node:fs/promises"
 import { fileURLToPath } from "node:url"
 
-const NAME = "epwwb"
+const NAME = "wolff-berman"
 const VERSION = "1.0.0"
 const DEFAULT_BASE = "https://eisenberg-pocock-warner-wolfe-berman.onrender.com"
-const BASE = (process.env.EPWWB_BASE_URL || DEFAULT_BASE).replace(/\/+$/, "")
+const BASE = (process.env.WOLFF_BERMAN_BASE_URL || DEFAULT_BASE).replace(/\/+$/, "")
 const API = `${BASE}/api/v1`
 
 /** Newest protocol revision this server was written against. */
@@ -369,7 +369,7 @@ const RESOURCES = [
   ["deck", "Slide deck", "The briefing deck as structured content."],
   ["funnel", "ACP funnel model", "Inputs, bounds and formulas behind the simulator."],
 ].map(([id, name, description]) => ({
-  uri: `epwwb://v1/${id}`,
+  uri: `wolff-berman://v1/${id}`,
   name,
   description,
   mimeType: "application/json",

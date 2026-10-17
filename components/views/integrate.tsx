@@ -82,10 +82,10 @@ for repo in win["active"]:
 
   const mcpConfig = `{
   "mcpServers": {
-    "epwwb": {
+    "wolff-berman": {
       "command": "node",
       "args": ["/absolute/path/to/integrations/mcp/server.mjs"],
-      "env": { "EPWWB_BASE_URL": "${origin}" }
+      "env": { "WOLFF_BERMAN_BASE_URL": "${origin}" }
     }
   }
 }`
@@ -182,7 +182,7 @@ for repo in win["active"]:
           <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground text-pretty">
             Or, in Claude Code:{" "}
             <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[11px]">
-              claude mcp add epwwb -- node …/integrations/mcp/server.mjs
+              claude mcp add wolff-berman -- node …/integrations/mcp/server.mjs
             </code>
           </p>
         </Panel>

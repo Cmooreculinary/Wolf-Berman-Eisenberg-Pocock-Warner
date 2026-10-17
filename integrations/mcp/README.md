@@ -1,4 +1,4 @@
-# `epwwb-mcp` — the dataset as MCP tools
+# `wolff-berman-mcp` — the dataset as MCP tools
 
 One file, no dependencies, no install step. If you have Node 18 or newer, you
 have everything this needs.
@@ -6,7 +6,7 @@ have everything this needs.
 ```jsonc
 {
   "mcpServers": {
-    "epwwb": {
+    "wolff-berman": {
       "command": "node",
       "args": ["/absolute/path/to/integrations/mcp/server.mjs"]
     }
@@ -21,7 +21,7 @@ stdio — and restart it.
 Claude Code, in one line:
 
 ```bash
-claude mcp add epwwb -- node /absolute/path/to/integrations/mcp/server.mjs
+claude mcp add wolff-berman -- node /absolute/path/to/integrations/mcp/server.mjs
 ```
 
 ## Tools
@@ -39,21 +39,21 @@ claude mcp add epwwb -- node /absolute/path/to/integrations/mcp/server.mjs
 | `simulate_funnel` | Runs the ACP model and returns MRR, payout, ARR and the 5x exit. |
 | `search` | One free-text query across every resource above. |
 
-Every resource is also exposed for direct reading at `epwwb://v1/<id>` —
-`epwwb://v1/window`, `epwwb://v1/skills`, and so on.
+Every resource is also exposed for direct reading at `wolff-berman://v1/<id>` —
+`wolff-berman://v1/window`, `wolff-berman://v1/skills`, and so on.
 
 ## Pointing it somewhere else
 
-The server reads the published JSON over HTTPS. `EPWWB_BASE_URL` moves it to
+The server reads the published JSON over HTTPS. `WOLFF_BERMAN_BASE_URL` moves it to
 another deployment, or to a local build:
 
 ```bash
 # your own deploy
-EPWWB_BASE_URL=https://your-site.example node server.mjs
+WOLFF_BERMAN_BASE_URL=https://your-site.example node server.mjs
 
 # a local static export, no network at all
 pnpm build:static
-EPWWB_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs
+WOLFF_BERMAN_BASE_URL="file://$PWD/out" node integrations/mcp/server.mjs
 ```
 
 Responses are cached in memory for five minutes. The data only changes when a
